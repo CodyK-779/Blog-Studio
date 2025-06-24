@@ -1,0 +1,120 @@
+"use client";
+
+import SignUpAction from "@/actions/sign-up-action";
+import SignUpOauthButton from "@/actions/signup-oauth-btn";
+import { ModeToggle } from "@/components/ModeToggle";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { ArrowLeftIcon } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
+
+export default function RegisterPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    const { error } = await SignUpAction(formData);
+
+    if (error) {
+      toast.error(error);
+    } else {
+      toast.success("User Signed Up successfully!");
+      router.push("/login");
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-sm w-full">
+      <div className="flex items-center justify-between mb-4">
+        <Button asChild className="flex items-center gap-2">
+          <Link href="/">
+            <ArrowLeftIcon />
+            Home
+          </Link>
+        </Button>
+        <ModeToggle />
+      </div>
+      <Card className="dark:bg-neutral-900">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl font-bold">
+            NextBlog
+          </CardTitle>
+          <CardDescription>
+            <p className="text-center text-sm pt-1 font-semibold">
+              Register to join the NextBlog
+            </p>
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="pb-4 border-b-2">
+          <form className="pt-4" onSubmit={handleSubmit}>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="name" className="font-medium">
+                  Name
+                </label>
+                <Input id="name" name="name" placeholder="Enter your Name" />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="email" className="font-medium">
+                  Email Address
+                </label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="password" className="font-medium">
+                  Password
+                </label>
+                <Input
+                  id="password"
+                  name="password"
+                  placeholder="Enter your password"
+                />
+              </div>
+            </div>
+            <Button
+              type="submit"
+              className="font-medium mt-6 py-1.5 w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Register"}
+            </Button>
+            <p className="pt-4 text-sm dark:text-neutral-400">
+              Already have an account?{" "}
+              <Link href="/login" className="hover:underline">
+                login
+              </Link>
+            </p>
+          </form>
+        </CardContent>
+        <CardFooter className="flex flex-col gap-4 pt-6">
+          <SignUpOauthButton provider="google" signUp />
+          <SignUpOauthButton provider="github" signUp />
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
