@@ -116,7 +116,6 @@ const CreateForm = () => {
               <SelectItem value="Cars">Cars</SelectItem>
               <SelectItem value="Foods">Foods</SelectItem>
               <SelectItem value="Games">Games</SelectItem>
-              <SelectItem value="RandomShit">RandomShit</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

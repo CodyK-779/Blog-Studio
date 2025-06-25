@@ -8,8 +8,8 @@ import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 
 const navLinks = [
-  { title: "Home", link: "/" },
-  { title: "Create", link: "/create" },
+  { title: "Home", link: "/blog" },
+  { title: "Create", link: "/blog/create" },
   { title: "Users", link: "/users" },
   { title: "Profile", link: "/profile" },
 ];

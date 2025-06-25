@@ -14,13 +14,15 @@ const SignoutButton = () => {
     await signOut({
       fetchOptions: {
         onRequest: () => setIsPending(true),
-        onResponse: () => setIsPending(false),
+        onResponse: () => {
+          setIsPending(false);
+        },
         onError: (cxt) => {
           toast.error(cxt.error.message);
         },
         onSuccess: () => {
           toast.success("User Signed out successfully!");
-          router.refresh();
+          router.push("/login");
         },
       },
     });

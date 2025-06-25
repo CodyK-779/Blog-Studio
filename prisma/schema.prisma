@@ -111,5 +111,4 @@ enum Categories {
   Cars
   Foods
   Games
-  RandomShit
 }

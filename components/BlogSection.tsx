@@ -7,6 +7,8 @@ import avatar from "@/public/avatar.png";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { FilterType } from "./FilterSection";
+import { getPost } from "@/actions/post-actions";
+import { Avatar, AvatarImage } from "./ui/avatar";
 
 interface Props {
   selectedCategory?: Categories;
@@ -76,8 +78,6 @@ const badgeType = (category: string) => {
         Games
       </Badge>
     );
-  } else {
-    return <Badge>Random Shit</Badge>;
   }
 };
 
@@ -87,7 +87,7 @@ const BlogSection = ({ selectedFilter, selectedCategory }: Props) => {
       {dummyData.map((data) => (
         <div
           key={data.name}
-          className="border shadow-lg rounded dark:bg-neutral-800 cursor-pointer"
+          className="border shadow-lg rounded-md dark:bg-neutral-800 cursor-pointer"
         >
           <div className="flex items-center justify-between px-4 py-3">
             <div className="flex items-center gap-4">
