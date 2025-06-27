@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
-export async function createPost(content: string, title: string, subTitle?: string, selectedValue?: Categories) {
+export async function createPost(content: string, title: string, subTitle?: string, selectedValue?: Categories, uploadImage?: string) {
   const session = await auth.api.getSession({
     headers: await headers()
   });
@@ -22,7 +22,8 @@ export async function createPost(content: string, title: string, subTitle?: stri
         content,
         subTitle,
         categories: selectedValue,
-        authorId: userId
+        authorId: userId,
+        image: uploadImage!
       }
     })
 
@@ -50,7 +51,8 @@ export async function getPost(selectedFilter: "asc" | "desc", selectedCategory?:
         author: {
           select: {
             name: true,
-            image: true
+            image: true,
+            role: true
           }
         },
       },
@@ -60,5 +62,52 @@ export async function getPost(selectedFilter: "asc" | "desc", selectedCategory?:
   } catch (error) {
     console.error("Failed to fetch posts", error);
     throw new Error("Failed to fetch posts")
+  }
+}
+
+export async function getPostDetails(id: string) {
+  try {
+    const posts = await prisma.post.findMany({
+      where: {
+        id
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+            image: true,
+          }
+        },
+        comment: {
+          select: {
+            author: {
+              select: {
+                name: true
+              }
+            }
+          },
+        }
+      }
+    })
+
+    return posts;
+  } catch (error) {
+    console.error("Failed to fetch post details", error);
+    throw new Error("Failed to fetch post details")
+  }
+}
+
+export async function deletePost(postId: string) {
+  try {
+    await prisma.post.delete({
+      where: {
+        id: postId
+      }
+    })
+
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to delete post", error);
+    throw new Error("Failed to delete post")
   }
 }

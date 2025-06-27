@@ -13,7 +13,7 @@ model Post {
   title      String
   subTitle   String?
   content    String
-  image      String?
+  image      String
   categories Categories?
   authorId   String
   comment    Comment[]
@@ -35,8 +35,10 @@ model Comment {
   updatedAt DateTime @updatedAt
 
   // Relations
-  author User @relation(fields: [authorId], references: [id])
-  post   Post @relation(fields: [postId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@map("comment")
 }
 
 model User {
@@ -108,6 +110,7 @@ enum UserRole {
 }
 
 enum Categories {
+  All
   Cars
   Foods
   Games

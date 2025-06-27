@@ -24,6 +24,10 @@ import {
 import { Categories } from "@/lib/generated/prisma";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useEdgeStore } from "@/lib/edgestore";
+import { SingleImageDropzone } from "./upload/single-image";
+import { UploaderProvider, type UploadFn } from "./upload/uploader-provider";
+import * as React from "react";
 
 const CreateForm = () => {
   const [isPosting, setIsPosting] = useState(false);
@@ -31,18 +35,34 @@ const CreateForm = () => {
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [selectedValue, setSelectedValue] = useState<Categories>();
+
+  const [uploadImage, setUploadImage] = useState("");
+
+  const { edgestore } = useEdgeStore();
   const router = useRouter();
 
   const handleSubmit = async () => {
+    if (!content.trim() || !uploadImage || !title.trim()) {
+      toast.error("Please fill in all required fields before posting.");
+      return;
+    }
+
     setIsPosting(true);
 
     try {
-      const results = await createPost(content, title, subTitle, selectedValue);
+      const results = await createPost(
+        content,
+        title,
+        subTitle,
+        selectedValue,
+        uploadImage
+      );
 
       if (results?.success) {
         setContent("");
         setTitle("");
         setSubTitle("");
+        setUploadImage("");
 
         toast.success("Post created successfully!");
       }
@@ -55,8 +75,23 @@ const CreateForm = () => {
     }
   };
 
+  const uploadFn: UploadFn = React.useCallback(
+    async ({ file, onProgressChange, signal }) => {
+      const res = await edgestore.publicFiles.upload({
+        file,
+        signal,
+        onProgressChange,
+      });
+
+      setUploadImage(res.url);
+
+      return res;
+    },
+    [edgestore]
+  );
+
   return (
-    <Card>
+    <Card className="mx-4">
       <CardHeader>
         <CardTitle className="text-center text-2xl font-bold">
           Blog form
@@ -64,9 +99,7 @@ const CreateForm = () => {
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-2 mb-4">
-          <label htmlFor="title" className="font-semibold">
-            Title
-          </label>
+          <label htmlFor="title">Title</label>
           <Input
             id="title"
             name="title"
@@ -94,31 +127,48 @@ const CreateForm = () => {
             id="content"
             name="content"
             content={content}
-            className="h-32"
+            className="h-36"
             placeholder="What's on your mind?"
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-      </CardContent>
-      <CardFooter className="flex items-center justify-between">
-        <Select
-          onValueChange={(value: Categories) => setSelectedValue(value)}
-          value={selectedValue}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue
-              className="font-medium"
-              placeholder="Select a Category?"
+        <div className="flex flex-col items-center py-4">
+          <UploaderProvider uploadFn={uploadFn} autoUpload>
+            <SingleImageDropzone
+              height={200}
+              width={200}
+              dropzoneOptions={{
+                maxSize: 1024 * 1024 * 1, // 1 MB
+              }}
             />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="Cars">Cars</SelectItem>
-              <SelectItem value="Foods">Foods</SelectItem>
-              <SelectItem value="Games">Games</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+          </UploaderProvider>
+        </div>
+      </CardContent>
+
+      <CardFooter className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Select
+            onValueChange={(value: Categories) => setSelectedValue(value)}
+            value={selectedValue}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue
+                className="font-medium"
+                placeholder="Select a Category?"
+              />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="Cars">Cars</SelectItem>
+                <SelectItem value="Foods">Foods</SelectItem>
+                <SelectItem value="Games">Games</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <p className="text-sm font-medium text-gray-400 dark:text-gray-200">
+            ( Optional )
+          </p>
+        </div>
         <Button
           onClick={handleSubmit}
           className="flex items-center gap-2 font-medium"

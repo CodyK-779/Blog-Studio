@@ -1,11 +1,19 @@
 import BlogSection from "@/components/BlogSection";
-import FilterSection from "@/components/FilterSection";
+import FilterSection, { FilterType } from "@/components/FilterSection";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
+import { Categories } from "@/lib/generated/prisma";
 import { headers } from "next/headers";
 import Link from "next/link";
 
-export default async function BlogPage() {
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: Categories; filter: FilterType }>;
+}) {
+  const selectedCategory = (await searchParams).category;
+  const selectedFilter = (await searchParams).filter;
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -13,7 +21,7 @@ export default async function BlogPage() {
   const createRestrict = session ? "/blog/create" : "/login";
 
   return (
-    <div className="pt-24 cm:pt-32 px-4">
+    <div className="pt-24 cm:pt-32 px-4 overflow-hidden">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl cm:text-6xl font-bold mb-6 text-center">
           Welcome to{" "}
@@ -31,12 +39,16 @@ export default async function BlogPage() {
           >
             <Link href={createRestrict}>Get Started</Link>
           </Button>
-          <Button size="lg" className="font-semibold text-md">
-            Explore
+          <Button size="lg" className="font-semibold text-md" asChild>
+            <Link href="#blog-section">Explore</Link>
           </Button>
         </div>
       </div>
       <FilterSection />
+      <BlogSection
+        selectedCategory={selectedCategory}
+        selectedFilter={selectedFilter}
+      />
     </div>
   );
 }

@@ -1,63 +1,20 @@
 import { Categories } from "@/lib/generated/prisma";
-import ghostRider from "../public/ghostRunner.jpg";
-import valorant1 from "../public/valorant1.jpg";
-import valorant2 from "../public/valorant2.jpg";
-import valorant3 from "../public/valorant3.jpg";
-import avatar from "@/public/avatar.png";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { FilterType } from "./FilterSection";
 import { getPost } from "@/actions/post-actions";
-import { Avatar, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { format } from "date-fns";
+import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { getUser } from "@/actions/user-actions";
+import DeleteBlogBtn from "./DeleteBlogBtn";
 
 interface Props {
   selectedCategory?: Categories;
   selectedFilter: FilterType;
 }
-
-const dummyData = [
-  {
-    name: "Jimmy",
-    userImg: avatar,
-    postDate: "October 1 2025",
-    image: ghostRider,
-    title: "Ghost Runner",
-    subTitle: "PC, Ps, Console",
-    content: "This is a parkour like game kinda fun ngl",
-    category: "Cars",
-  },
-  {
-    name: "Tom",
-    userImg: avatar,
-    postDate: "December 1 2025",
-    image: valorant1,
-    title: "Valorant 1",
-    subTitle: "PC, Ps, Console",
-    content:
-      "This is a unique counter-strike like shooter game with powers and made by Riot games",
-    category: "Games",
-  },
-  {
-    name: "David",
-    userImg: avatar,
-    postDate: "April 1 2025",
-    image: valorant2,
-    title: "Valorant2",
-    content:
-      "This is a unique counter-strike like shooter game with powers and made by Riot games",
-    category: "Games",
-  },
-  {
-    name: "Cody",
-    userImg: avatar,
-    postDate: "April 4 2005",
-    image: valorant3,
-    title: "Valorant3",
-    subTitle: "PC, Ps, Console",
-    content: "This is a parkour like game kinda fun ngl",
-    category: "Games",
-  },
-];
 
 const badgeType = (category: string) => {
   if (category === "Cars") {
@@ -81,43 +38,80 @@ const badgeType = (category: string) => {
   }
 };
 
-const BlogSection = ({ selectedFilter, selectedCategory }: Props) => {
+export const formattedDate = (postDate: Date) => {
+  return format(new Date(postDate), "MMMM d yyyy");
+};
+
+export const fallbackAvatar = (authorName: string) => {
+  return authorName.charAt(0).toUpperCase();
+};
+
+const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
+  const posts = await getPost(selectedFilter, selectedCategory);
+
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const currentUser = session ? await getUser(session.user.id) : null;
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {dummyData.map((data) => (
-        <div
-          key={data.name}
-          className="border shadow-lg rounded-md dark:bg-neutral-800 cursor-pointer"
+    <div
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      id="blog-section"
+    >
+      {posts.map((post) => (
+        <Link
+          href={`/blog/${post.id}`}
+          key={post.id}
+          className="border shadow-lg rounded-md dark:bg-neutral-800 hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-transform duration-150 ease-in"
         >
           <div className="flex items-center justify-between px-4 py-3">
             <div className="flex items-center gap-4">
-              <Image
-                src={data.userImg}
-                alt={data.name}
-                className="size-10 rounded-full"
-              />
+              <Avatar className="cursor-pointer size-8">
+                <AvatarImage src={post.author.image!} />
+                <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
+                  {fallbackAvatar(post.author.name)}
+                </AvatarFallback>
+              </Avatar>
               <div className="flex flex-col text-sm">
-                <p>{data.name}</p>
-                <p>{data.postDate}</p>
+                <div className="flex items-center gap-2">
+                  <p>{post.author.name}</p>
+                  {post.author.role === "Admin" && (
+                    <i className="ri-vip-crown-fill text-yellow-400"></i>
+                  )}
+                </div>
+                <p>{formattedDate(post.createdAt)}</p>
               </div>
             </div>
-            {data.category && badgeType(data.category)}
+            {post.categories && badgeType(post.categories)}
           </div>
-          {data.image && (
-            <Image src={data.image} alt="image" className="object-cover" />
+          {post.image && (
+            <Image
+              src={post.image}
+              alt="image"
+              width={1000}
+              height={300}
+              className="object-cover"
+            />
           )}
           <div className="p-4">
-            <p className="text-2xl font-semibold mb-1 text-red-500 dark:text-blue-600">
-              {data.title}
-            </p>
-            {data.subTitle && (
+            <div className="flex items-center justify-between">
+              <p className="text-2xl font-semibold mb-1 text-red-500 dark:text-blue-600">
+                {post.title}
+              </p>
+              {currentUser && currentUser.role === "Admin" && (
+                <DeleteBlogBtn postId={post.id} />
+              )}
+            </div>
+            {post.subTitle && (
               <p className="font-medium mb-1 text-blue-600 dark:text-red-600">
-                {data.subTitle}
+                {post.subTitle}
               </p>
             )}
-            <p className="text-sm">{data.content}</p>
+            <p className="text-sm truncate max-w-[50ch]">{post.content}</p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

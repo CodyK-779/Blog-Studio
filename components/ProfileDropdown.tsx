@@ -8,14 +8,18 @@ import {
 
 interface Props {
   userImg: string;
+  fallbackAvatar: string | null;
 }
 
-const ProfileDropdown = ({ userImg }: Props) => {
+const ProfileDropdown = ({ userImg, fallbackAvatar }: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer size-8">
-          <AvatarImage src={userImg ?? "../public/avatar.png"} />
+          <AvatarImage src={userImg} />
+          <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
+            {fallbackAvatar}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

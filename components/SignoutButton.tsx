@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Loader2Icon } from "lucide-react";
 
 const SignoutButton = () => {
   const [isPending, setIsPending] = useState(false);
@@ -31,12 +32,17 @@ const SignoutButton = () => {
   return (
     <Button
       onClick={handleClick}
-      size="sm"
-      variant="destructive"
       disabled={isPending}
-      className="font-medium"
+      className="font-medium bg-red-500 hover:bg-red-600 flex items-center text-white w-fit gap-2"
     >
-      {isPending ? "Loading..." : "Sign Out"}
+      {isPending ? (
+        <>
+          <Loader2Icon />
+          Loading...
+        </>
+      ) : (
+        <>Sign Out</>
+      )}
     </Button>
   );
 };

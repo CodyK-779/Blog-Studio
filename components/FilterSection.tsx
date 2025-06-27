@@ -12,32 +12,46 @@ import {
 } from "./ui/select";
 import { PlusCircleIcon } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
-import { useState } from "react";
 import { Categories } from "@/lib/generated/prisma";
-import BlogSection from "./BlogSection";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export type FilterType = "asc" | "desc";
 
 const FilterSection = () => {
   const { data: session } = authClient.useSession();
-  const [selectedCategory, setSelectedCategory] = useState<Categories>();
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>("desc");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const handleChange = (name: string, value: Categories | FilterType | "") => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value === "") {
+      params.delete(name);
+    } else {
+      params.set(name, value);
+    }
+
+    router.push(`?${params.toString()}`);
+  };
 
   const navigateCreate = session ? "/blog/create" : "/login";
 
   return (
     <>
-      <div className="w-full flex flex-col cm:flex-row items-center justify-center cm:justify-between mt-32 mb-20 gap-6">
+      <div className="w-full flex flex-col cm:flex-row items-center justify-center cm:justify-between mt-32 mb-20 gap-6 px-2">
         <div className="flex items-center gap-4">
           <div>
             <Select
-              onValueChange={(value: Categories) => setSelectedCategory(value)}
+              onValueChange={(value: Categories | "") =>
+                handleChange("category", value === "All" ? "" : value)
+              }
+              defaultValue={searchParams.get("category") || "All"}
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[150px] sm:w-[180px]">
                 <SelectValue placeholder="Categories" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
+                  <SelectItem value="All">All</SelectItem>
                   <SelectItem value="Cars">Cars</SelectItem>
                   <SelectItem value="Foods">Foods</SelectItem>
                   <SelectItem value="Games">Games</SelectItem>
@@ -48,9 +62,12 @@ const FilterSection = () => {
 
           <div>
             <Select
-              onValueChange={(value: FilterType) => setSelectedFilter(value)}
+              onValueChange={(value: FilterType) =>
+                handleChange("filter", value)
+              }
+              defaultValue={searchParams.get("filter") || "desc"}
             >
-              <SelectTrigger className="w-[150px]">
+              <SelectTrigger className="w-[140px] sm:w-[150px]">
                 <SelectValue placeholder="Filter" />
               </SelectTrigger>
               <SelectContent>
@@ -64,7 +81,7 @@ const FilterSection = () => {
         </div>
         <Button
           asChild
-          className="flex items-center gap-2 bg-red-500 dark:bg-blue-600 text-white"
+          className="flex items-center gap-2 bg-red-500 dark:bg-blue-600 hover:bg-red-600 dark:hover:bg-blue-700 text-white"
         >
           <Link href={navigateCreate} className="font-semibold">
             <PlusCircleIcon />
@@ -72,10 +89,6 @@ const FilterSection = () => {
           </Link>
         </Button>
       </div>
-      <BlogSection
-        selectedCategory={selectedCategory}
-        selectedFilter={selectedFilter}
-      />
     </>
   );
 };
