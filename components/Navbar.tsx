@@ -8,13 +8,6 @@ import { authClient } from "@/lib/auth-client";
 import logo from "@/public/camera.png";
 import Image from "next/image";
 
-const navLinks = [
-  { title: "Home", link: "/blog" },
-  { title: "Create", link: "/blog/create" },
-  { title: "Users", link: "/users" },
-  { title: "Profile", link: "/profile" },
-];
-
 interface Props {
   setOpenMenu: (openMenu: boolean) => void;
 }
@@ -22,6 +15,16 @@ interface Props {
 const Navbar = ({ setOpenMenu }: Props) => {
   const { data: session } = authClient.useSession();
   const fallbackAvatar = session && session.user.name.charAt(0).toUpperCase();
+
+  const navLinks = [
+    { title: "Home", link: "/blog" },
+    { title: "Create", link: "/blog/create" },
+    { title: "Users", link: "/users" },
+    {
+      title: "Profile",
+      link: `${session ? `/profile/${session.user.id}` : "/profile"}`,
+    },
+  ];
 
   return (
     <nav className="sticky top-0 px-8 py-6 border-b-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 overflow-hidden">

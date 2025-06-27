@@ -46,7 +46,7 @@ const FilterSection = () => {
               }
               defaultValue={searchParams.get("category") || "All"}
             >
-              <SelectTrigger className="w-[150px] sm:w-[180px]">
+              <SelectTrigger className="w-[150px] sm:w-[180px] border-gray-300 dark:border-gray-700 border-2">
                 <SelectValue placeholder="Categories" />
               </SelectTrigger>
               <SelectContent>
@@ -67,7 +67,7 @@ const FilterSection = () => {
               }
               defaultValue={searchParams.get("filter") || "desc"}
             >
-              <SelectTrigger className="w-[140px] sm:w-[150px]">
+              <SelectTrigger className="w-[140px] sm:w-[150px] border-gray-300 dark:border-gray-700 border-2">
                 <SelectValue placeholder="Filter" />
               </SelectTrigger>
               <SelectContent>

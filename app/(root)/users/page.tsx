@@ -29,7 +29,10 @@ export default async function UsersPage() {
       </p>
       <div className="flex flex-col gap-5 mt-20 max-w-4xl w-full mx-auto">
         {users.map((user) => (
-          <Card key={user.id} className="border-black dark:border-neutral-50">
+          <Card
+            key={user.id}
+            className="border-neutral-300 border-2 dark:border-neutral-500"
+          >
             <CardContent className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 py-6 px-3.5">
               <div className="flex items-center gap-2.5">
                 <Avatar className="size-12 cursor-pointer">
@@ -44,13 +47,16 @@ export default async function UsersPage() {
                     {user.role === "Admin" && (
                       <i className="ri-vip-crown-fill text-yellow-400 ml-2"></i>
                     )}
-                    <p className="ml-2 text-xs text-neutral-500 dark:text-neutral-400">
+                    <p className="ml-2 text-xs text-neutral-500 dark:text-neutral-400 max-[450px]:hidden">
                       <span className="mr-2">•</span> joined in{" "}
                       {formattedDate(user.createdAt)}
                     </p>
                   </div>
                   <p className="text-sm text-neutral-500 dark:text-neutral-400">
                     {user.email}
+                  </p>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 hidden max-[450px]:block">
+                    Joined in {formattedDate(user.createdAt)}
                   </p>
                 </div>
               </div>

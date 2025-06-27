@@ -64,7 +64,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
         <Link
           href={`/blog/${post.id}`}
           key={post.id}
-          className="border shadow-lg rounded-md dark:bg-neutral-800 hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-transform duration-150 ease-in"
+          className=" border-neutral-300 border-2 dark:border-neutral-600 shadow-lg rounded-md dark:bg-neutral-800 hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-transform duration-150 ease-in"
         >
           <div className="flex items-center justify-between px-4 py-3">
             <div className="flex items-center gap-4">

@@ -12,18 +12,21 @@ interface Props {
   setOpenMenu: (openMenu: boolean) => void;
 }
 
-const navLinks = [
-  { title: "Home", link: "/blog" },
-  { title: "Create", link: "/blog/create" },
-  { title: "Users", link: "/users" },
-  { title: "Profile", link: "/profile" },
-];
-
 const sidebarStyles =
   "cm:hidden fixed z-30 rounded top-0 right-0 min-h-screen w-[300px] max-[400px]:w-full bg-white/60 backdrop-blur-lg dark:bg-neutral-800/70 shadow transform transition-transform duration-300";
 
 const Sidebar = ({ openMenu, setOpenMenu }: Props) => {
   const { data: session } = useSession();
+
+  const navLinks = [
+    { title: "Home", link: "/blog" },
+    { title: "Create", link: "/blog/create" },
+    { title: "Users", link: "/users" },
+    {
+      title: "Profile",
+      link: `${session ? `/profile/${session.user.id}` : "/profile"}`,
+    },
+  ];
 
   const fallbackAvatar = session && session.user.name.charAt(0).toUpperCase();
   return (
