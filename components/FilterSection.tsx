@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "./ui/button";
 import {
   Select,
   SelectContent,
@@ -14,6 +13,7 @@ import { PlusCircleIcon } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { Categories } from "@/lib/generated/prisma";
 import { useRouter, useSearchParams } from "next/navigation";
+import { HoverBorderGradient } from "./ui/hover-border-gradient";
 
 export type FilterType = "asc" | "desc";
 
@@ -37,7 +37,7 @@ const FilterSection = () => {
 
   return (
     <>
-      <div className="w-full flex flex-col cm:flex-row items-center justify-center cm:justify-between mt-32 mb-20 gap-6 px-2">
+      <div className="container w-full flex flex-col cm:flex-row items-center justify-center cm:justify-between mt-32 mb-20 gap-6 px-2">
         <div className="flex items-center gap-4">
           <div>
             <Select
@@ -79,15 +79,15 @@ const FilterSection = () => {
             </Select>
           </div>
         </div>
-        <Button
-          asChild
-          className="flex items-center gap-2 bg-red-500 dark:bg-blue-600 hover:bg-red-600 dark:hover:bg-blue-700 text-white"
-        >
-          <Link href={navigateCreate} className="font-semibold">
-            <PlusCircleIcon />
+        <HoverBorderGradient className="text-white px-4 py-2">
+          <Link
+            href={navigateCreate}
+            className="font-semibold flex items-center gap-2 text-base"
+          >
+            <PlusCircleIcon className="size-4" />
             Create Blog
           </Link>
-        </Button>
+        </HoverBorderGradient>
       </div>
     </>
   );

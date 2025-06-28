@@ -34,10 +34,6 @@ const DeleteUserBtn = ({ userId }: Props) => {
     }
   };
 
-  // const handleDelete = (userId: string) => {
-  //   console.log(userId);
-  // };
-
   return (
     <Button
       size="sm"
@@ -46,7 +42,7 @@ const DeleteUserBtn = ({ userId }: Props) => {
       onClick={() => handleDelete(userId)}
       disabled={isDeleting}
     >
-      {isDeleting ? <Loader2Icon /> : <TrashIcon />}
+      {isDeleting ? <Loader2Icon className="animate-spin" /> : <TrashIcon />}
     </Button>
   );
 };

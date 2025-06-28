@@ -27,7 +27,7 @@ const Navbar = ({ setOpenMenu }: Props) => {
   ];
 
   return (
-    <nav className="sticky top-0 px-8 py-6 border-b-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 overflow-hidden">
+    <nav className="sticky top-0 px-8 py-6 border-b-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-20 overflow-hidden">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/blog" className="flex items-center gap-3">
           <Image src={logo} alt="logo" width={36} height={36} />

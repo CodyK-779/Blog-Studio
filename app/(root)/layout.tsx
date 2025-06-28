@@ -9,11 +9,11 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <div suppressHydrationWarning>
+    <div>
       <Navbar setOpenMenu={setOpenMenu} />
       {openMenu && <Overlay setOpenMenu={setOpenMenu} />}
       <Sidebar openMenu={openMenu} setOpenMenu={setOpenMenu} />
-      <main className="max-w-7xl mx-auto overflow-hidden">{children}</main>
+      <main className="overflow-hidden">{children}</main>
     </div>
   );
 }

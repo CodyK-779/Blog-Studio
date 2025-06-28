@@ -34,7 +34,7 @@ export async function createPost(content: string, title: string, subTitle?: stri
   }
 }
 
-export async function getPost(selectedFilter: "asc" | "desc", selectedCategory?: Categories) {
+export async function getPost(selectedFilter: "asc" | "desc", selectedCategory?: Categories, take6?: boolean) {
   try {
     const whereClause: Prisma.PostWhereInput = {};
     
@@ -56,6 +56,7 @@ export async function getPost(selectedFilter: "asc" | "desc", selectedCategory?:
           }
         },
       },
+      ...(take6 ? { take: 6 } : {})
     })
 
     return post;

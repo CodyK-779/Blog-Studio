@@ -37,7 +37,7 @@ const SignoutButton = () => {
     >
       {isPending ? (
         <>
-          <Loader2Icon />
+          <Loader2Icon className="animate-spin" />
           Loading...
         </>
       ) : (

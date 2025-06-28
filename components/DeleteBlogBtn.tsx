@@ -42,7 +42,7 @@ const DeleteBlogBtn = ({ postId }: Props) => {
       disabled={isDeleting}
       onClick={() => handleDelete(postId)}
     >
-      {isDeleting ? <Loader2Icon /> : <TrashIcon />}
+      {isDeleting ? <Loader2Icon className="animate-spin" /> : <TrashIcon />}
     </Button>
   );
 };

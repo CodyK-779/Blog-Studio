@@ -176,7 +176,7 @@ const CreateForm = () => {
         >
           {isPosting ? (
             <>
-              <Loader2Icon />
+              <Loader2Icon className="animate-spin" />
               Loading...
             </>
           ) : (
