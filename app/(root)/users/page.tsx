@@ -4,6 +4,8 @@ import DeleteUserBtn from "@/components/DeleteUserBtn";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Link from "next/link";
@@ -18,15 +20,35 @@ export default async function UsersPage() {
   const users = await getAllUsers();
   const specificUser = await getUser(session.user.id);
 
+  const words = [
+    {
+      text: "Blog-Studio",
+      className: "text-red-500 dark:text-blue-600",
+    },
+    {
+      text: "Users",
+    },
+  ];
+
+  const generateWords = "These are all the users who joined Blog Studio";
+
   return (
-    <div className="px-4">
-      <h1 className="text-center text-4xl sm:text-5xl mt-10 font-bold">
-        <span className="text-red-500 dark:text-blue-600">Next-Blog</span> Users
-      </h1>
-      <p className="text-center text-xl sm:text-2xl mt-4 font-semibold">
-        These are all the users who joined{" "}
-        <span className="text-blue-600 dark:text-red-500">Next-Blog</span>
-      </p>
+    <div className="px-4 mt-10">
+      <div className="container flex flex-col justify-center items-center">
+        <TypewriterEffectSmooth
+          words={words}
+          className="text-center text-3xl sm:text-5xl font-bold px-2"
+          cursorClassName="bg-red-500 dark:bg-blue-600"
+        />
+        <TextGenerateEffect
+          className="text-center text-lg sm:text-2xl font-semibold"
+          words={generateWords}
+        />
+        {/* <p className="">
+          These are all the users who joined{" "}
+          <span className="text-blue-600 dark:text-red-500">Next-Blog</span>
+        </p> */}
+      </div>
       <div className="flex flex-col gap-5 mt-20 max-w-4xl w-full mx-auto">
         {users.map((user) => (
           <Card

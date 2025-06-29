@@ -21,7 +21,7 @@ export default function NotFoundPage() {
           <HoverBorderGradient className="px-4 py-3 text-white">
             <Link href="/blog" className="flex items-center gap-2">
               <MoveLeftIcon />
-              Back to Next-Blog
+              Back to Blog Studio
               <Image src={logo} alt="logo" className="size-5" />
             </Link>
           </HoverBorderGradient>

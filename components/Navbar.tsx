@@ -7,6 +7,7 @@ import ProfileDropdown from "./ProfileDropdown";
 import { authClient } from "@/lib/auth-client";
 import logo from "@/public/camera.png";
 import Image from "next/image";
+import GradientText from "./ui/GradientText";
 
 interface Props {
   setOpenMenu: (openMenu: boolean) => void;
@@ -24,6 +25,10 @@ const Navbar = ({ setOpenMenu }: Props) => {
       title: "Profile",
       link: `${session ? `/profile/${session.user.id}` : "/profile"}`,
     },
+    {
+      title: "Blogs",
+      link: "/blog/library",
+    },
   ];
 
   return (
@@ -31,7 +36,10 @@ const Navbar = ({ setOpenMenu }: Props) => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/blog" className="flex items-center gap-3">
           <Image src={logo} alt="logo" width={36} height={36} />
-          <h1 className="text-2xl sm:text-3xl font-bold">Next Blog</h1>
+          {/* <h1 className="text-2xl sm:text-3xl font-bold">Blog Studio</h1> */}
+          <GradientText className="max-[400px]:text-2xl text-3xl font-bold">
+            Blog Studio
+          </GradientText>
         </Link>
         <ul className="hidden cm:flex items-center gap-12">
           {navLinks.map((link) => (

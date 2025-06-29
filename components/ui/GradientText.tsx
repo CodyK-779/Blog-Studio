@@ -22,7 +22,7 @@ export default function GradientText({
 
   return (
     <div
-      className={`relative rounded-[1.25rem] font-medium backdrop-blur transition-shadow duration-500 overflow-hidden ${className}`}
+      className={`relative rounded-[1.25rem] font-semibold  transition-shadow duration-500 overflow-hidden ${className}`}
     >
       {showBorder && (
         <div
@@ -45,7 +45,7 @@ export default function GradientText({
         </div>
       )}
       <div
-        className="inline-block relative z-2 text-transparent bg-cover animate-gradient"
+        className="inline-block relative z-2 text-transparent bg-cover animate-gradient leading-[1.3]"
         style={{
           ...gradientStyle,
           backgroundClip: "text",

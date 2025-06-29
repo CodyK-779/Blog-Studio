@@ -14,7 +14,7 @@ export default async function BlogPage({
   return (
     <div className="pt-24 cm:pt-32 overflow-hidden">
       <HeroSection />
-      <FilterSection />
+      <FilterSection mt />
       <BlogSection
         selectedCategory={selectedCategory}
         selectedFilter={selectedFilter}

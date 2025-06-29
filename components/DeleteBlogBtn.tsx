@@ -9,9 +9,10 @@ import { useRouter } from "next/navigation";
 
 interface Props {
   postId: string;
+  redirectPath: string;
 }
 
-const DeleteBlogBtn = ({ postId }: Props) => {
+const DeleteBlogBtn = ({ postId, redirectPath }: Props) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
@@ -23,7 +24,7 @@ const DeleteBlogBtn = ({ postId }: Props) => {
 
       if (results.success) {
         toast.success("Blog post deleted successfully!");
-        router.push("/blog");
+        router.push(redirectPath);
       } else {
         toast.error("Failed to delete Blog post.");
       }

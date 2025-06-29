@@ -34,23 +34,25 @@ export default function LoginPage() {
       toast.error(error);
     } else {
       toast.success("User Logged in successfully!");
-      router.push("/");
+      router.push("/blog");
       setIsLoading(false);
     }
   };
+
+  const inputBorder = "border-2 border-neutral-300 dark:border-neutral-600";
 
   return (
     <div className="max-w-sm w-full">
       <div className="flex items-center justify-between mb-4">
         <Button asChild className="flex items-center gap-2">
-          <Link href="/">
+          <Link href="/blog">
             <ArrowLeftIcon />
             Home
           </Link>
         </Button>
         <ModeToggle />
       </div>
-      <Card className="dark:bg-neutral-900">
+      <Card className="dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-bold">
             NextBlog
@@ -61,7 +63,7 @@ export default function LoginPage() {
             </p>
           </CardDescription>
         </CardHeader>
-        <CardContent className="pb-4 border-b-2">
+        <CardContent className="pb-4 border-b-2 border-neutral-300 dark:border-neutral-600">
           <form className="pt-4" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-2">
@@ -73,6 +75,7 @@ export default function LoginPage() {
                   name="email"
                   type="email"
                   placeholder="Enter your email"
+                  className={inputBorder}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -88,6 +91,7 @@ export default function LoginPage() {
                   id="password"
                   name="password"
                   placeholder="Enter your password"
+                  className={inputBorder}
                 />
               </div>
             </div>

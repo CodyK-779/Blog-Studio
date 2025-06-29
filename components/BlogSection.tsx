@@ -12,16 +12,14 @@ import { headers } from "next/headers";
 import { getUser } from "@/actions/user-actions";
 import DeleteBlogBtn from "./DeleteBlogBtn";
 import GradientText from "./ui/GradientText";
-import { Button } from "./ui/button";
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
-import { ArrowLeftIcon } from "lucide-react";
 
 interface Props {
   selectedCategory?: Categories;
   selectedFilter: FilterType;
 }
 
-const badgeType = (category: string) => {
+export const badgeType = (category: string) => {
   if (category === "Cars") {
     return (
       <Badge variant="secondary" className="bg-blue-600 text-white">
@@ -38,6 +36,24 @@ const badgeType = (category: string) => {
     return (
       <Badge variant="default" className="bg-red-500 text-white">
         Games
+      </Badge>
+    );
+  } else if (category === "Movies") {
+    return (
+      <Badge variant="default" className="bg-purple-800 text-white">
+        Movies
+      </Badge>
+    );
+  } else if (category === "Memes") {
+    return (
+      <Badge variant="default" className="bg-orange-600 text-white">
+        Memes
+      </Badge>
+    );
+  } else if (category === "Art") {
+    return (
+      <Badge variant="default" className="bg-yellow-400 text-white">
+        Art
       </Badge>
     );
   }
@@ -59,7 +75,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
   });
 
   const currentUser = session ? await getUser(session.user.id) : null;
-  const restrictLibraryAccess = session ? "/blog/blog-library" : "/login";
+  const restrictLibraryAccess = session ? "/blog/library" : "/login";
 
   return (
     <div className="container" id="blog-section">
@@ -72,7 +88,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
             <Link
               href={`/blog/${post.id}`}
               key={post.id}
-              className="border-neutral-300 border-2 dark:border-neutral-600 shadow-lg rounded-md dark:bg-neutral-800 hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-transform duration-150 ease-in"
+              className="border-neutral-300 border-2 dark:border-neutral-600 shadow-lg rounded-lg dark:bg-neutral-900 hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-transform duration-150 ease-in"
             >
               <div className="flex items-center justify-between px-4 py-3">
                 <div className="flex items-center gap-4">
@@ -99,8 +115,6 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                   <Image
                     src={post.image}
                     alt="image"
-                    // width={1000}
-                    // height={300}
                     fill
                     className="object-cover"
                   />
@@ -112,7 +126,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                     {post.title}
                   </p>
                   {currentUser && currentUser.role === "Admin" && (
-                    <DeleteBlogBtn postId={post.id} />
+                    <DeleteBlogBtn postId={post.id} redirectPath="/blog" />
                   )}
                 </div>
                 {post.subTitle && (
@@ -125,12 +139,6 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
             </Link>
           ))}
         </div>
-        {/* <Button
-          asChild
-          className="mt-8 grid place-self-center text-white bg-red-500 dark:bg-blue-600 hover:bg-red-600 dark:hover:bg-blue-700 transition-colors duration-150 ease-in"
-        >
-          <Link href={restrictLibraryAccess}>See More</Link>
-        </Button> */}
         <div className="flex justify-center">
           <HoverBorderGradient className="px-4 py-2.5 text-white bg-neutral-800 dark:bg-neutral-900">
             <Link

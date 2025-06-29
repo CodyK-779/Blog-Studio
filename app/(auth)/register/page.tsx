@@ -40,18 +40,20 @@ export default function RegisterPage() {
     }
   };
 
+  const inputBorder = "border-2 border-neutral-300 dark:border-neutral-600";
+
   return (
     <div className="max-w-sm w-full">
       <div className="flex items-center justify-between mb-4">
         <Button asChild className="flex items-center gap-2">
-          <Link href="/">
+          <Link href="/blog">
             <ArrowLeftIcon />
             Home
           </Link>
         </Button>
         <ModeToggle />
       </div>
-      <Card className="dark:bg-neutral-900">
+      <Card className="dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-bold">
             NextBlog
@@ -62,14 +64,19 @@ export default function RegisterPage() {
             </p>
           </CardDescription>
         </CardHeader>
-        <CardContent className="pb-4 border-b-2">
+        <CardContent className="pb-4 border-b-2 border-neutral-300 dark:border-neutral-600">
           <form className="pt-4" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-2">
                 <label htmlFor="name" className="font-medium">
                   Name
                 </label>
-                <Input id="name" name="name" placeholder="Enter your Name" />
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder="Enter your Name"
+                  className={inputBorder}
+                />
               </div>
 
               <div className="flex flex-col gap-2">
@@ -81,6 +88,7 @@ export default function RegisterPage() {
                   name="email"
                   type="email"
                   placeholder="Enter your email"
+                  className={inputBorder}
                 />
               </div>
 
@@ -92,6 +100,7 @@ export default function RegisterPage() {
                   id="password"
                   name="password"
                   placeholder="Enter your password"
+                  className={inputBorder}
                 />
               </div>
             </div>

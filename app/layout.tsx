@@ -13,7 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Next-Blog",
+  title: "Blog Studio",
   description: "Blog website powered by Next.js",
 };
 
@@ -31,7 +31,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="min-h-screen pb-20">
+          <div className="min-h-screen">
             <main>
               <EdgeStoreProvider>{children}</EdgeStoreProvider>
             </main>

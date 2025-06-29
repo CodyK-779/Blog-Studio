@@ -26,6 +26,10 @@ const Sidebar = ({ openMenu, setOpenMenu }: Props) => {
       title: "Profile",
       link: `${session ? `/profile/${session.user.id}` : "/profile"}`,
     },
+    {
+      title: "Blogs",
+      link: "/blog/library",
+    },
   ];
 
   const fallbackAvatar = session && session.user.name.charAt(0).toUpperCase();
@@ -67,6 +71,7 @@ const Sidebar = ({ openMenu, setOpenMenu }: Props) => {
           <Link
             key={link.title}
             href={link.link}
+            onClick={() => setOpenMenu(false)}
             className="font-semibold hover:text-red-500 dark:hover:text-blue-500 transition-colors duration-150"
           >
             {link.title}

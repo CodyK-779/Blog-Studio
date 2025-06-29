@@ -31,6 +31,7 @@ model Comment {
   content   String
   authorId  String
   postId    String
+  image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -114,4 +115,7 @@ enum Categories {
   Cars
   Foods
   Games
+  Movies
+  Memes
+  Art
 }

@@ -71,7 +71,7 @@ const CreateForm = () => {
       toast.error("Failed to create Post");
     } finally {
       setIsPosting(false);
-      router.push("/");
+      router.push("/blog/library");
     }
   };
 
@@ -90,8 +90,10 @@ const CreateForm = () => {
     [edgestore]
   );
 
+  const inputStyles = "border-2 border-neutral-300 dark:border-neutral-600";
+
   return (
-    <Card className="mx-4">
+    <Card className="mx-4 border-2 border-neutral-300 dark:border-neutral-600">
       <CardHeader>
         <CardTitle className="text-center text-2xl font-bold">
           Blog form
@@ -104,6 +106,7 @@ const CreateForm = () => {
             id="title"
             name="title"
             content={title}
+            className={inputStyles}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
@@ -118,6 +121,7 @@ const CreateForm = () => {
             id="sub-title"
             name="sub-title"
             content={subTitle}
+            className={inputStyles}
             onChange={(e) => setSubTitle(e.target.value)}
           />
         </div>
@@ -127,7 +131,7 @@ const CreateForm = () => {
             id="content"
             name="content"
             content={content}
-            className="h-36"
+            className={`h-36 ${inputStyles}`}
             placeholder="What's on your mind?"
             onChange={(e) => setContent(e.target.value)}
           />
@@ -151,7 +155,7 @@ const CreateForm = () => {
             onValueChange={(value: Categories) => setSelectedValue(value)}
             value={selectedValue}
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className={`w-[180px] ${inputStyles}`}>
               <SelectValue
                 className="font-medium"
                 placeholder="Select a Category?"
@@ -162,6 +166,9 @@ const CreateForm = () => {
                 <SelectItem value="Cars">Cars</SelectItem>
                 <SelectItem value="Foods">Foods</SelectItem>
                 <SelectItem value="Games">Games</SelectItem>
+                <SelectItem value="Movies">Movies</SelectItem>
+                <SelectItem value="Memes">Memes</SelectItem>
+                <SelectItem value="Art">Art</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

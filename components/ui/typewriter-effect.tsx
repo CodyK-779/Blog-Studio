@@ -4,23 +4,15 @@ import { cn } from "@/lib/utils";
 import { motion, stagger, useAnimate, useInView } from "motion/react";
 import { useEffect } from "react";
 
-const words = [
-  {
-    text: "Welcome",
-  },
-  {
-    text: "to",
-  },
-  {
-    text: "Next-Blog",
-    className: "text-red-500 dark:text-blue-600",
-  },
-];
-
 export const TypewriterEffect = ({
+  words,
   className,
   cursorClassName,
 }: {
+  words: {
+    text: string;
+    className?: string;
+  }[];
   className?: string;
   cursorClassName?: string;
 }) => {
@@ -107,9 +99,14 @@ export const TypewriterEffect = ({
 };
 
 export const TypewriterEffectSmooth = ({
+  words,
   className,
   cursorClassName,
 }: {
+  words: {
+    text: string;
+    className?: string;
+  }[];
   className?: string;
   cursorClassName?: string;
 }) => {
@@ -143,7 +140,7 @@ export const TypewriterEffectSmooth = ({
   };
 
   return (
-    <div className={cn("flex space-x-1 mb-4", className)}>
+    <div className={cn("flex mb-4", className)}>
       <motion.div
         className="overflow-hidden pb-2"
         initial={{
@@ -159,7 +156,7 @@ export const TypewriterEffectSmooth = ({
         }}
       >
         <div
-          className="text-2xl min-[500px]:text-4xl cm:text-6xl font-bold text-center"
+          className={className}
           style={{
             whiteSpace: "nowrap",
           }}
@@ -181,7 +178,7 @@ export const TypewriterEffectSmooth = ({
           repeatType: "reverse",
         }}
         className={cn(
-          "block rounded-sm w-[4px]  h-8 sm:h-10 bg-blue-500",
+          "block rounded-sm w-[4px] h-8 sm:h-12 bg-blue-500",
           cursorClassName
         )}
       ></motion.span>
