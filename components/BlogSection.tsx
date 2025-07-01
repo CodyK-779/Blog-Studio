@@ -157,7 +157,11 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                     {post.title}
                   </p>
                   {currentUser && currentUser.role === "Admin" && (
-                    <DeleteBlogBtn postId={post.id} redirectPath="/blog" />
+                    <DeleteBlogBtn
+                      imageUrl={post.image}
+                      postId={post.id}
+                      redirectPath="/blog"
+                    />
                   )}
                 </div>
                 {post.subTitle && (

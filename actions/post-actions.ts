@@ -82,6 +82,9 @@ export async function getPostDetails(id: string) {
           }
         },
         comment: {
+          where: {
+            parentId: null
+          },
           orderBy: {
             createdAt: "asc"
           },
@@ -114,14 +117,7 @@ export async function getPostDetails(id: string) {
               }
             },
             replies: {
-              select: {
-                id: true,
-                content: true,
-                createdAt: true,
-                updatedAt: true,
-                parentId: true,
-                authorId: true,
-                postId: true,
+              include: {
                 author: {
                   select: {
                     id: true,
@@ -143,7 +139,7 @@ export async function getPostDetails(id: string) {
                     replies: true
                   }
                 }
-              }
+              },
             }
           }
         },

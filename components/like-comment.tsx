@@ -66,7 +66,11 @@ const LikeAndComment = ({ post, currentUser }: Props) => {
       </div>
       {currentUser &&
         (currentUser.role === "Admin" || currentUser.id === post.author.id) && (
-          <DeleteBlogBtn postId={post.id} redirectPath="/blog/library" />
+          <DeleteBlogBtn
+            imageUrl={post.image}
+            postId={post.id}
+            redirectPath="/blog/library"
+          />
         )}
     </div>
   );

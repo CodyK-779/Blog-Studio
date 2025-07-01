@@ -17,20 +17,29 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
+import { useEdgeStore } from "@/lib/edgestore";
 
 interface Props {
   postId: string;
+  imageUrl: string;
   redirectPath: string;
 }
 
-const DeleteBlogBtn = ({ postId, redirectPath }: Props) => {
+const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
   const [isDeleting, setIsDeleting] = useState(false);
+  const { edgestore } = useEdgeStore();
   const router = useRouter();
 
   const handleDelete = async (postId: string) => {
     setIsDeleting(true);
 
     try {
+      if (imageUrl) {
+        await edgestore.publicFiles.delete({
+          url: imageUrl,
+        });
+      }
+
       const results = await deletePost(postId);
 
       if (results.success) {

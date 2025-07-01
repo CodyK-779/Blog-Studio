@@ -1,6 +1,9 @@
 "use client";
 
-import { CommentWithRelations } from "@/actions/comment-type";
+import {
+  CommentWithRelations,
+  ReplyWithRelations,
+} from "@/actions/comment-type";
 import { deleteComment, toggleCmtLike } from "@/actions/comment.action";
 import { UserDetail } from "@/actions/post-type";
 import { useSession } from "@/lib/auth-client";
@@ -22,12 +25,13 @@ import {
 
 interface Props {
   user: UserDetail;
-  comment: CommentWithRelations;
+  comment: CommentWithRelations | ReplyWithRelations;
   postId: string;
   authorId: string;
+  small?: boolean;
 }
 
-const LikeCmtDelete = ({ user, comment, postId, authorId }: Props) => {
+const LikeCmtDelete = ({ user, comment, postId, authorId, small }: Props) => {
   const { data: session } = useSession();
 
   if (!session) return null;
@@ -88,6 +92,8 @@ const LikeCmtDelete = ({ user, comment, postId, authorId }: Props) => {
         >
           <HeartIcon
             className={`transition-colors duration-150 ease-in ${
+              small && "size-[22px]"
+            } ${
               comment.likes.some((like) => like.userId === session?.user.id) &&
               "text-red-500 fill-red-500"
             }`}

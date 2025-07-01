@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 
 interface Props {
   postId: string;
-  parentId: string | null;
   commentId: string;
   activeReplyId: string | null;
   setActiveReplyId: (id: string | null) => void;
@@ -19,7 +18,6 @@ interface Props {
 
 const ReplyCommentField = ({
   postId,
-  parentId,
   commentId,
   activeReplyId,
   setActiveReplyId,
@@ -40,11 +38,12 @@ const ReplyCommentField = ({
     setIsCommenting(true);
 
     try {
-      const results = await createReply(postId, parentId, comment);
+      const results = await createReply(postId, comment, commentId);
 
       if (results?.success) {
         setComment("");
         toast.success("Added reply successfully!");
+        setActiveReplyId(null);
         router.push(`/blog/${postId}`);
       }
     } catch (error) {

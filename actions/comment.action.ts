@@ -88,7 +88,7 @@ export async function toggleCmtLike(commentId: string, postId: string) {
   }
 }
 
-export async function createReply(postId: string, parentId: string | null, content: string) {
+export async function createReply(postId: string, content: string, commentId: string) {
   try {
     const session = await auth.api.getSession({
       headers: await headers()
@@ -100,7 +100,7 @@ export async function createReply(postId: string, parentId: string | null, conte
       data: {
         authorId: session.user.id,
         postId,
-        parentId,
+        parentId: commentId,
         content
       }
     })

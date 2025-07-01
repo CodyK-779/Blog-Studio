@@ -42,6 +42,49 @@ export type CommentWithRelations = BaseComment & {
 
 export type CommentsWithRelations = CommentWithRelations[];
 
+export type ReplyWithRelations = BaseComment & {
+  author: CommentAuthor;
+  _count: {
+    replies: number;
+    likes: number;
+  };
+  likes: CommentLike[];
+  updatedAt: Date;
+};
+
+export type RepliesWithRelations = ReplyWithRelations[];
+
+export interface CommentWithExtras {
+  id: string;
+  content: string;
+  authorId: string;
+  postId: string;
+  parentId: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+
+  author: {
+    id: string;
+    name: string;
+    image: string | null;
+    role: "User" | "Admin";
+  };
+
+  likes: {
+    userId: string;
+    postId: string | null;
+    commentId: string | null;
+  }[];
+
+  _count: {
+    replies: number;
+    likes: number;
+  };
+
+  replies: CommentWithExtras[];
+}
+
+
 /*
 {
     id: string;

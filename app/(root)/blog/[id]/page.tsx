@@ -116,18 +116,7 @@ export default async function BlogPageDetails({
               </h3>
             )}
             <p className="text-sm pt-4 pb-6 border-b-2 border-neutral-300 dark:border-neutral-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-              officia, eos optio molestias libero porro minima mollitia enim
-              aperiam asperiores voluptatibus nostrum hic dignissimos voluptas
-              ab atque voluptate, vel dolores. Corrupti vitae voluptates dolorem
-              reprehenderit culpa non dolores. Reprehenderit eaque incidunt
-              ullam excepturi quia perspiciatis eum libero deleniti voluptatibus
-              itaque enim tempora ipsam quisquam corrupti cum nisi maxime beatae
-              vitae, obcaecati aliquam quae officia quam illum. Delectus odit
-              assumenda quod a impedit obcaecati numquam culpa similique
-              praesentium, perferendis dolor eligendi nisi quas quisquam quis
-              veniam fugiat. Aliquam odit dolores esse, suscipit temporibus
-              minima obcaecati, magnam quidem, quis est quod numquam.
+              {post.image}
             </p>
             <CommentField postId={post.id} />
             <CommentSection

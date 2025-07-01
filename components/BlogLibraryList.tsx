@@ -73,6 +73,7 @@ const BlogLibraryList = async ({ selectedCategory, selectedFilter }: Props) => {
                 {currentUser && currentUser.role === "Admin" && (
                   <DeleteBlogBtn
                     postId={post.id}
+                    imageUrl={post.image}
                     redirectPath="/blog/library"
                   />
                 )}

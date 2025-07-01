@@ -17,27 +17,27 @@ interface Props {
   comments: CommentsWithRelations;
 }
 
+export const fallbackAvatar = (authorName: string) => {
+  return authorName.charAt(0).toUpperCase();
+};
+
+export function getShortTimeAgo(date: Date) {
+  const full = formatDistanceToNowStrict(date, {
+    addSuffix: false,
+    roundingMethod: "floor",
+  });
+
+  // e.g., "4 hours", "3 days", "1 year"
+  const [amount, unit] = full.split(" ");
+  const shortUnit = unit[0]; // h, d, y, etc.
+  return `${amount}${shortUnit}`;
+}
+
 const CommentSection = ({ user, authorId, postId, comments }: Props) => {
   const { data: session } = useSession();
   const [activeReplyId, setActiveReplyId] = useState<string | null>(null);
 
   if (!session) return null;
-
-  const fallbackAvatar = (authorName: string) => {
-    return authorName.charAt(0).toUpperCase();
-  };
-
-  function getShortTimeAgo(date: Date) {
-    const full = formatDistanceToNowStrict(date, {
-      addSuffix: false,
-      roundingMethod: "floor",
-    });
-
-    // e.g., "4 hours", "3 days", "1 year"
-    const [amount, unit] = full.split(" ");
-    const shortUnit = unit[0]; // h, d, y, etc.
-    return `${amount}${shortUnit}`;
-  }
 
   return (
     <div className="w-full">
@@ -72,7 +72,6 @@ const CommentSection = ({ user, authorId, postId, comments }: Props) => {
                   <p className="text-sm my-1">{cmt.content}</p>
                   <ReplyCommentField
                     postId={postId}
-                    parentId={cmt.parentId}
                     commentId={cmt.id}
                     activeReplyId={activeReplyId}
                     setActiveReplyId={setActiveReplyId}
@@ -85,12 +84,15 @@ const CommentSection = ({ user, authorId, postId, comments }: Props) => {
                   authorId={authorId}
                 />
               </div>
-              {cmt.replies.length <= 0 && (
+              {cmt.replies.length > 0 && (
                 <div className="mt-4">
-                  {/* <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400 cursor-pointer">
-                    --View 2 replies--
-                  </p> */}
-                  <Replies />
+                  <Replies
+                    user={user}
+                    authorId={authorId}
+                    postId={postId}
+                    replies={cmt.replies}
+                    replyCount={cmt._count.replies}
+                  />
                 </div>
               )}
             </div>
