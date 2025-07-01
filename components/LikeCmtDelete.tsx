@@ -8,6 +8,17 @@ import { HeartIcon, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
 
 interface Props {
   user: UserDetail;
@@ -84,16 +95,37 @@ const LikeCmtDelete = ({ user, comment, postId, authorId }: Props) => {
         </button>
         <p className="text-sm">{comment._count.likes}</p>
       </div>
+
       {(user?.role === "Admin" ||
         comment.author.id === session.user.id ||
         authorId === session.user.id) && (
-        <button
-          className="cursor-pointer"
-          disabled={isDeleting}
-          onClick={handleDelete}
-        >
-          <Trash2Icon size="20" />
-        </button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <button className="cursor-pointer" disabled={isDeleting}>
+              <Trash2Icon size="20" />
+            </button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to delete this comment this action cannot
+                be undone
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel className="bg-black hover:bg-neutral-800 hover:text-white text-white dark:bg-white dark:hover:bg-opacity-90 dark:text-black">
+                Cancel
+              </AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleDelete}
+                className="bg-red-500 hover:bg-red-700 text-white"
+              >
+                Confirm
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       )}
     </div>
   );

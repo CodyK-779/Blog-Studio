@@ -99,6 +99,7 @@ export default async function BlogPageDetails({
                 src={post.image}
                 alt={post.title}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 768px, 1024px"
                 className="object-cover"
               />
             </div>

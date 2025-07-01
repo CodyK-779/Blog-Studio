@@ -6,6 +6,17 @@ import { deletePost } from "@/actions/post-actions";
 import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
 
 interface Props {
   postId: string;
@@ -36,15 +47,42 @@ const DeleteBlogBtn = ({ postId, redirectPath }: Props) => {
   };
 
   return (
-    <Button
-      variant="destructive"
-      className="bg-red-500"
-      size="sm"
-      disabled={isDeleting}
-      onClick={() => handleDelete(postId)}
-    >
-      {isDeleting ? <Loader2Icon className="animate-spin" /> : <Trash2Icon />}
-    </Button>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button
+          variant="destructive"
+          className="bg-red-500"
+          size="sm"
+          disabled={isDeleting}
+        >
+          {isDeleting ? (
+            <Loader2Icon className="animate-spin" />
+          ) : (
+            <Trash2Icon />
+          )}
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
+          <AlertDialogDescription>
+            Are you sure you want to delete this post this action cannot be
+            undone
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel className="bg-black hover:bg-neutral-800 hover:text-white text-white dark:bg-white dark:hover:bg-opacity-90 dark:text-black">
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction
+            onClick={() => handleDelete(postId)}
+            className="bg-red-500 hover:bg-red-700 text-white"
+          >
+            Confirm
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 
