@@ -7,6 +7,8 @@ import ReplyCommentField from "./ReplyCommentField";
 import { formatDistanceToNowStrict } from "date-fns";
 import { CommentsWithRelations } from "@/actions/comment-type";
 import { UserDetail } from "@/actions/post-type";
+import Replies from "./Replies";
+import { useState } from "react";
 
 interface Props {
   user: UserDetail;
@@ -17,6 +19,7 @@ interface Props {
 
 const CommentSection = ({ user, authorId, postId, comments }: Props) => {
   const { data: session } = useSession();
+  const [activeReplyId, setActiveReplyId] = useState<string | null>(null);
 
   if (!session) return null;
 
@@ -65,9 +68,15 @@ const CommentSection = ({ user, authorId, postId, comments }: Props) => {
                 )}
               </div>
               <div className="flex flex-col sm:flex-row sm:justify-between items-start">
-                <div className="flex flex-col">
+                <div className="flex flex-col flex-1">
                   <p className="text-sm my-1">{cmt.content}</p>
-                  <ReplyCommentField />
+                  <ReplyCommentField
+                    postId={postId}
+                    parentId={cmt.parentId}
+                    commentId={cmt.id}
+                    activeReplyId={activeReplyId}
+                    setActiveReplyId={setActiveReplyId}
+                  />
                 </div>
                 <LikeCmtDelete
                   user={user}
@@ -76,6 +85,14 @@ const CommentSection = ({ user, authorId, postId, comments }: Props) => {
                   authorId={authorId}
                 />
               </div>
+              {cmt.replies.length <= 0 && (
+                <div className="mt-4">
+                  {/* <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400 cursor-pointer">
+                    --View 2 replies--
+                  </p> */}
+                  <Replies />
+                </div>
+              )}
             </div>
           </div>
         ))

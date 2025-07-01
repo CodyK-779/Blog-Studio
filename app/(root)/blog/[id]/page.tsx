@@ -7,7 +7,6 @@ import {
 } from "@/components/BlogSection";
 import CommentField from "@/components/CommentField";
 import CommentSection from "@/components/CommentSection";
-import DeleteBlogBtn from "@/components/DeleteBlogBtn";
 import LikeAndComment from "@/components/like-comment";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";

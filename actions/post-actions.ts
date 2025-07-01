@@ -4,7 +4,6 @@ import { auth } from "@/lib/auth";
 import { Categories, Prisma } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { tree } from "next/dist/build/templates/app-page";
 import { headers } from "next/headers";
 
 export async function createPost(content: string, title: string, subTitle?: string, selectedValue?: Categories, uploadImage?: string) {
@@ -227,62 +226,3 @@ export async function toggleLike(postId: string) {
     return { success: false, error: "Failed to toggle like" };
   }
 }
-
-/*
-include: {
-    author: {
-      select: {
-        id: true,
-        name: true,
-        role: true,
-        image: true
-      }
-    },
-    likes: {
-      select: {
-        userId: true,
-        postId: true,
-        commentId: true
-      }
-    },
-    _count: {
-      select: {
-        likes: true,
-        replies: true
-      }
-    },
-    replies: {
-      select: {
-        id: true,
-        content: true,
-        createdAt: true,
-        updatedAt: true,
-        parentId: true,
-        authorId: true,
-        postId: true,
-        author: {
-          select: {
-            id: true,
-            name: true,
-            image: true,
-            role: true
-          }
-        },
-        likes: {
-          select: {
-            userId: true,
-            postId: true,
-            commentId: true
-          }
-        },
-        _count: {
-          select: {
-            likes: true,
-            replies: true
-          }
-        }
-      },
-      take: 10
-    }
-  },
-*/

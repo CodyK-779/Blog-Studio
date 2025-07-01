@@ -87,3 +87,27 @@ export async function toggleCmtLike(commentId: string, postId: string) {
     return { success: false, error: "Failed to like comment" };
   }
 }
+
+export async function createReply(postId: string, parentId: string | null, content: string) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers()
+    });
+
+    if (!session) return;
+
+    await prisma.comment.create({
+      data: {
+        authorId: session.user.id,
+        postId,
+        parentId,
+        content
+      }
+    })
+
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to create reply", error);
+    throw new Error("Failed to creaet reply")
+  }
+}
