@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { deleteUser } from "@/actions/user-actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Loader2Icon, TrashIcon } from "lucide-react";
+import { Loader2Icon, Trash2Icon } from "lucide-react";
 
 interface Props {
   userId: string;
@@ -42,7 +42,7 @@ const DeleteUserBtn = ({ userId }: Props) => {
       onClick={() => handleDelete(userId)}
       disabled={isDeleting}
     >
-      {isDeleting ? <Loader2Icon className="animate-spin" /> : <TrashIcon />}
+      {isDeleting ? <Loader2Icon className="animate-spin" /> : <Trash2Icon />}
     </Button>
   );
 };

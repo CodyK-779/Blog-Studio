@@ -1,11 +1,8 @@
-import { getPost } from "@/actions/post-actions";
 import BlogLibraryList from "@/components/BlogLibraryList";
 import FilterSection, { FilterType } from "@/components/FilterSection";
 import GradientText from "@/components/ui/GradientText";
 import { SparklesCore } from "@/components/ui/sparkles";
-import { auth } from "@/lib/auth";
 import { Categories } from "@/lib/generated/prisma";
-import { headers } from "next/headers";
 
 export default async function BlogLibrary({
   searchParams,

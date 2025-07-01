@@ -20,6 +20,8 @@ const BlogLibraryList = async ({ selectedCategory, selectedFilter }: Props) => {
     headers: await headers(),
   });
 
+  if (!session) return null;
+
   const posts = await getPost(selectedFilter, selectedCategory, false);
   const currentUser = session ? await getUser(session.user.id) : null;
 
@@ -53,11 +55,12 @@ const BlogLibraryList = async ({ selectedCategory, selectedFilter }: Props) => {
               {post.categories && badgeType(post.categories)}
             </div>
             {post.image && (
-              <div className="relative w-full h-48">
+              <div className="relative aspect-video w-full">
                 <Image
                   src={post.image}
                   alt="image"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 768px, 1024px"
                   className="object-cover"
                 />
               </div>

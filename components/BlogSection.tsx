@@ -19,40 +19,70 @@ interface Props {
   selectedFilter: FilterType;
 }
 
-export const badgeType = (category: string) => {
+export const badgeType = (category: string, padding?: boolean) => {
   if (category === "Cars") {
     return (
-      <Badge variant="secondary" className="bg-blue-600 text-white">
+      <Badge
+        variant="secondary"
+        className={`bg-blue-600 text-white ${
+          padding && "font-semibold sm:text-sm sm:px-4 sm:py-1"
+        }`}
+      >
         Cars
       </Badge>
     );
   } else if (category === "Foods") {
     return (
-      <Badge variant="secondary" className="bg-green-500 text-white">
+      <Badge
+        variant="secondary"
+        className={`bg-green-500 text-white ${
+          padding && "font-semibold sm:text-sm sm:px-4 sm:py-1"
+        }`}
+      >
         Foods
       </Badge>
     );
   } else if (category === "Games") {
     return (
-      <Badge variant="default" className="bg-red-500 text-white">
+      <Badge
+        variant="default"
+        className={`bg-red-500 text-white ${
+          padding && "font-semibold sm:text-sm sm:px-4 sm:py-1"
+        }`}
+      >
         Games
       </Badge>
     );
   } else if (category === "Movies") {
     return (
-      <Badge variant="default" className="bg-purple-800 text-white">
+      <Badge
+        variant="default"
+        className={`bg-purple-600 text-white ${
+          padding && "font-semibold sm:text-sm sm:px-4 sm:py-1"
+        }`}
+      >
         Movies
       </Badge>
     );
   } else if (category === "Memes") {
     return (
-      <Badge variant="default" className="bg-orange-600 text-white">
+      <Badge
+        variant="default"
+        className={`bg-orange-500 text-white ${
+          padding && "font-semibold sm:text-sm sm:px-4 sm:py-1"
+        }`}
+      >
         Memes
       </Badge>
     );
   } else if (category === "Art") {
     return (
-      <Badge variant="default" className="bg-yellow-400 text-white">
+      <Badge
+        variant="default"
+        className={`bg-yellow-400 text-white ${
+          padding && "font-semibold sm:text-sm sm:px-4 sm:py-1"
+        }`}
+      >
         Art
       </Badge>
     );
@@ -111,11 +141,12 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                 {post.categories && badgeType(post.categories)}
               </div>
               {post.image && (
-                <div className="relative w-full h-48">
+                <div className="relative aspect-video w-full">
                   <Image
                     src={post.image}
                     alt="image"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 768px, 1024px"
                     className="object-cover"
                   />
                 </div>

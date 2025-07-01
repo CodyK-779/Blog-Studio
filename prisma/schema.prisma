@@ -17,6 +17,7 @@ model Post {
   categories Categories?
   authorId   String
   comment    Comment[]
+  like       Like[]
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 
@@ -26,18 +27,38 @@ model Post {
   @@map("post")
 }
 
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  postId    String?
+  commentId String?
+  createdAt DateTime @default(now())
+
+  // Relations
+  author  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post    Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  comment Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+  @@unique([userId, commentId])
+  @@map("like")
+}
+
 model Comment {
   id        String   @id @default(cuid())
   content   String
   authorId  String
   postId    String
-  image     String?
+  parentId  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // Relations
-  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author  User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post    Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies Comment[] @relation("CommentReplies")
+  likes   Like[]
 
   @@map("comment")
 }
@@ -52,6 +73,7 @@ model User {
   createdAt     DateTime
   updatedAt     DateTime
   post          Post[]
+  like          Like[]
   comment       Comment[]
   sessions      Session[]
   accounts      Account[]

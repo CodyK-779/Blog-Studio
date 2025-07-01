@@ -1,0 +1,11 @@
+{
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "javascript.suggest.autoImports": true,
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "typescript.tsserver.log": "verbose",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  }
+}

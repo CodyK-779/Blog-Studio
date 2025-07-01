@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { Categories, Prisma } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { tree } from "next/dist/build/templates/app-page";
 import { headers } from "next/headers";
 
 export async function createPost(content: string, title: string, subTitle?: string, selectedValue?: Categories, uploadImage?: string) {
@@ -75,20 +76,91 @@ export async function getPostDetails(id: string) {
       include: {
         author: {
           select: {
+            id: true,
             name: true,
             image: true,
+            role: true
           }
         },
         comment: {
+          orderBy: {
+            createdAt: "asc"
+          },
           select: {
+            id: true,
+            authorId: true,
+            postId: true,
+            content: true,
+            createdAt: true,
+            parentId: true,
             author: {
               select: {
-                name: true
+                id: true,
+                name: true,
+                role: true,
+                image: true
+              }
+            },
+            likes: {
+              select: {
+                userId: true,
+                postId: true,
+                commentId: true
+              }
+            },
+            _count: {
+              select: {
+                likes: true,
+                replies: true
+              }
+            },
+            replies: {
+              select: {
+                id: true,
+                content: true,
+                createdAt: true,
+                updatedAt: true,
+                parentId: true,
+                authorId: true,
+                postId: true,
+                author: {
+                  select: {
+                    id: true,
+                    name: true,
+                    image: true,
+                    role: true
+                  }
+                },
+                likes: {
+                  select: {
+                    userId: true,
+                    postId: true,
+                    commentId: true
+                  }
+                },
+                _count: {
+                  select: {
+                    likes: true,
+                    replies: true
+                  }
+                }
               }
             }
-          },
+          }
+        },
+        like: {
+          select: {
+            userId: true,
+            postId: true
+          }
+        },
+        _count: {
+          select: {
+            like: true,
+            comment: true
+          }
         }
-      }
+      },
     })
 
     return posts;
@@ -112,3 +184,105 @@ export async function deletePost(postId: string) {
     throw new Error("Failed to delete post")
   }
 }
+
+export async function toggleLike(postId: string) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers()
+    });
+
+    if (!session) return;
+
+    const existingLike = await prisma.like.findUnique({
+      where: {
+        userId_postId: {
+          userId: session.user.id,
+          postId
+        }
+      }
+    });
+
+    if (existingLike) {
+      await prisma.like.delete({
+        where: {
+          userId_postId: {
+            userId: session.user.id,
+            postId
+          }
+        }
+      })
+    } else {
+      await prisma.like.create({
+        data: {
+          userId: session.user.id,
+          postId
+        }
+      })
+    }
+
+    revalidatePath(`/blog/${postId}`);
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to toggle like:", error);
+    return { success: false, error: "Failed to toggle like" };
+  }
+}
+
+/*
+include: {
+    author: {
+      select: {
+        id: true,
+        name: true,
+        role: true,
+        image: true
+      }
+    },
+    likes: {
+      select: {
+        userId: true,
+        postId: true,
+        commentId: true
+      }
+    },
+    _count: {
+      select: {
+        likes: true,
+        replies: true
+      }
+    },
+    replies: {
+      select: {
+        id: true,
+        content: true,
+        createdAt: true,
+        updatedAt: true,
+        parentId: true,
+        authorId: true,
+        postId: true,
+        author: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+            role: true
+          }
+        },
+        likes: {
+          select: {
+            userId: true,
+            postId: true,
+            commentId: true
+          }
+        },
+        _count: {
+          select: {
+            likes: true,
+            replies: true
+          }
+        }
+      },
+      take: 10
+    }
+  },
+*/

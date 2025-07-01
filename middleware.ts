@@ -11,10 +11,12 @@ export async function middleware(request: NextRequest) {
   const res = NextResponse.next();
   const pathname = nextUrl.pathname;
 
-  const isOnBlogDetail = pathname.startsWith("/blog/") && !protectedRoutes.includes(pathname) && pathname.split("/").length === 3;
-
   const isLoggedIn = !!sessionCookie;
-  const isOnProtectedRoute = protectedRoutes.includes(pathname);
+  // const isOnProtectedRoute = protectedRoutes.includes(pathname);
+  const isOnProtectedRoute = protectedRoutes.some(route =>
+    pathname === route || pathname.startsWith(`/blog/`)
+  );
+
   const isOnAuthRoute = authRoutes.some(route => pathname.startsWith(route));
   
   if (isOnProtectedRoute && !isLoggedIn) {

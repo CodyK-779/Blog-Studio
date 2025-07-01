@@ -1,10 +1,10 @@
 "use client";
 
-import { Loader2Icon, TrashIcon } from "lucide-react";
+import { Loader2Icon, Trash2Icon } from "lucide-react";
 import { Button } from "./ui/button";
 import { deletePost } from "@/actions/post-actions";
 import { toast } from "sonner";
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -43,7 +43,7 @@ const DeleteBlogBtn = ({ postId, redirectPath }: Props) => {
       disabled={isDeleting}
       onClick={() => handleDelete(postId)}
     >
-      {isDeleting ? <Loader2Icon className="animate-spin" /> : <TrashIcon />}
+      {isDeleting ? <Loader2Icon className="animate-spin" /> : <Trash2Icon />}
     </Button>
   );
 };

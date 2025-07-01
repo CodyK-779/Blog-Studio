@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "like" ALTER COLUMN "postId" DROP NOT NULL,
+ALTER COLUMN "commentId" DROP NOT NULL;

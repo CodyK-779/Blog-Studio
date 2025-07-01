@@ -81,7 +81,7 @@ const Footer = () => {
         <div className="flex flex-col">
           <h1 className="text-xl font-bold">Follow me on</h1>
           <p className="text-sm text-neutral-600 dark:text-neutral-300 font-medium mt-2">
-            This doesn't work it's just for show LMAO cuz it looks cool
+            This doesn't work it's just for show cuz it looks cool LMAO
           </p>
           <div className="flex items-center mt-4 gap-3">
             <i className="ri-github-fill text-2xl cursor-pointer"></i>
