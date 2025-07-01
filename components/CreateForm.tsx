@@ -50,6 +50,10 @@ const CreateForm = () => {
     setIsPosting(true);
 
     try {
+      await edgestore.publicFiles.confirmUpload({
+        url: uploadImage,
+      });
+
       const results = await createPost(
         content,
         title,
@@ -81,6 +85,9 @@ const CreateForm = () => {
         file,
         signal,
         onProgressChange,
+        options: {
+          temporary: true,
+        },
       });
 
       setUploadImage(res.url);
@@ -142,7 +149,7 @@ const CreateForm = () => {
               height={200}
               width={200}
               dropzoneOptions={{
-                maxSize: 1024 * 1024 * 1, // 1 MB
+                maxSize: 1024 * 1024 * 2, // 1 MB
               }}
             />
           </UploaderProvider>
