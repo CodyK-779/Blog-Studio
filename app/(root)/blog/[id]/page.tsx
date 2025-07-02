@@ -8,13 +8,13 @@ import {
 import CommentField from "@/components/CommentField";
 import CommentSection from "@/components/CommentSection";
 import LikeAndComment from "@/components/like-comment";
+import PostDetailImage from "@/components/PostDetailImage";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { Categories } from "@/lib/generated/prisma";
 import { ArrowLeft } from "lucide-react";
 import { headers } from "next/headers";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -93,15 +93,7 @@ export default async function BlogPageDetails({
               </div>
             </div>
 
-            <div className="relative w-full aspect-video rounded-xl overflow-hidden border-4">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 768px, 1024px"
-                className="object-cover"
-              />
-            </div>
+            <PostDetailImage postImage={post.image} postTitle={post.title} />
             <LikeAndComment post={post} currentUser={currentUser} />
             <h1
               className={`max-[400px]:text-xl text-2xl sm:text-4xl font-semibold pt-4 mb-2 ${titleColor(
@@ -116,7 +108,7 @@ export default async function BlogPageDetails({
               </h3>
             )}
             <p className="text-sm pt-4 pb-6 border-b-2 border-neutral-300 dark:border-neutral-600">
-              {post.image}
+              {post.content}
             </p>
             <CommentField postId={post.id} />
             <CommentSection

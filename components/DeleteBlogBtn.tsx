@@ -39,7 +39,6 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
           url: imageUrl,
         });
       }
-
       const results = await deletePost(postId);
 
       if (results.success) {

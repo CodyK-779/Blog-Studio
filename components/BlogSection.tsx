@@ -113,78 +113,89 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
         <GradientText className="font-semibold text-4xl text-center mb-12">
           Blog Section
         </GradientText>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {posts.map((post) => (
-            <Link
-              href={`/blog/${post.id}`}
-              key={post.id}
-              className="border-neutral-300 border-2 dark:border-neutral-600 shadow-lg rounded-lg dark:bg-neutral-900 hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-transform duration-150 ease-in"
-            >
-              <div className="flex items-center justify-between px-4 py-3">
-                <div className="flex items-center gap-4">
-                  <Avatar className="cursor-pointer size-8">
-                    <AvatarImage src={post.author.image!} />
-                    <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
-                      {fallbackAvatar(post.author.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col text-sm">
-                    <div className="flex items-center gap-2">
-                      <p>{post.author.name}</p>
-                      {post.author.role === "Admin" && (
-                        <i className="ri-vip-crown-fill text-yellow-400"></i>
-                      )}
+        {posts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {posts.map((post) => (
+              <Link
+                href={`/blog/${post.id}`}
+                key={post.id}
+                className="border-neutral-300 border-2 dark:border-neutral-600 shadow-lg rounded-lg dark:bg-neutral-900 hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-transform duration-150 ease-in"
+              >
+                <div className="flex items-center justify-between px-4 py-3">
+                  <div className="flex items-center gap-4">
+                    <Avatar className="cursor-pointer size-8">
+                      <AvatarImage src={post.author.image!} />
+                      <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
+                        {fallbackAvatar(post.author.name)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col text-sm">
+                      <div className="flex items-center gap-2">
+                        <p>{post.author.name}</p>
+                        {post.author.role === "Admin" && (
+                          <i className="ri-vip-crown-fill text-yellow-400"></i>
+                        )}
+                      </div>
+                      <p>{formattedDate(post.createdAt)}</p>
                     </div>
-                    <p>{formattedDate(post.createdAt)}</p>
                   </div>
+                  {post.categories && badgeType(post.categories)}
                 </div>
-                {post.categories && badgeType(post.categories)}
-              </div>
-              {post.image && (
-                <div className="relative aspect-video w-full">
-                  <Image
-                    src={post.image}
-                    alt="image"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 768px, 1024px"
-                    className="object-cover"
-                  />
-                </div>
-              )}
-              <div className="p-4">
-                <div className="flex items-center justify-between">
-                  <p className="text-2xl font-semibold mb-1 text-red-500 dark:text-blue-600">
-                    {post.title}
-                  </p>
-                  {currentUser && currentUser.role === "Admin" && (
-                    <DeleteBlogBtn
-                      imageUrl={post.image}
-                      postId={post.id}
-                      redirectPath="/blog"
+                {post.image && (
+                  <div className="relative aspect-video w-full">
+                    <Image
+                      src={post.image}
+                      alt="image"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 768px, 1024px"
+                      className="object-cover"
                     />
-                  )}
-                </div>
-                {post.subTitle && (
-                  <p className="font-medium mb-1 text-blue-600 dark:text-red-600">
-                    {post.subTitle}
-                  </p>
+                  </div>
                 )}
-                <p className="text-sm truncate max-w-[50ch]">{post.content}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="flex justify-center">
-          <HoverBorderGradient className="px-4 py-2.5 text-white bg-neutral-800 dark:bg-neutral-900">
-            <Link
-              href={restrictLibraryAccess}
-              className="flex items-center gap-2"
-            >
-              Show More
-              <Image src={logo} alt="logo" className="size-5" />
-            </Link>
-          </HoverBorderGradient>
-        </div>
+                <div className="p-4">
+                  <div className="flex items-center justify-between">
+                    <p className="text-2xl font-semibold mb-1 text-red-500 dark:text-blue-600">
+                      {post.title}
+                    </p>
+                    {currentUser && currentUser.role === "Admin" && (
+                      <DeleteBlogBtn
+                        imageUrl={post.image}
+                        postId={post.id}
+                        redirectPath="/blog"
+                      />
+                    )}
+                  </div>
+                  {post.subTitle && (
+                    <p className="font-medium mb-1 text-blue-600 dark:text-red-600">
+                      {post.subTitle}
+                    </p>
+                  )}
+                  <p className="text-sm truncate max-w-[50ch]">
+                    {post.content}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className="text-xl font-semibold text-center mt-12 mb-10">
+            No blogs have been posted yet
+          </p>
+        )}
+
+        {posts.length > 0 && (
+          <div className="flex justify-center">
+            <HoverBorderGradient className="px-4 py-2.5 text-white bg-neutral-800 dark:bg-neutral-900">
+              <Link
+                href={restrictLibraryAccess}
+                className="flex items-center gap-2"
+              >
+                Show More
+                <Image src={logo} alt="logo" className="size-5" />
+              </Link>
+            </HoverBorderGradient>
+          </div>
+        )}
       </div>
     </div>
   );
