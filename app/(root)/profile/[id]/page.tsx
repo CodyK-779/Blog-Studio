@@ -121,7 +121,7 @@ export default async function ProfilePage({
           <UserBlogPosts userId={user.id} />
         ) : (
           <p className="text-center text-neutral-600 dark:text-neutral-400 px-2 font-semibold mt-32">
-            This user haven't created any post yet
+            This user haven't created any blog yet
           </p>
         )}
       </div>

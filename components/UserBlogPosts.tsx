@@ -27,7 +27,7 @@ const UserBlogPosts = async ({ userId }: Props) => {
   return (
     <div className="mt-12">
       <GradientText className="text-4xl text-center px-2 font-bold">
-        All the post <br /> this user have created
+        All the blogs <br /> this user have created
       </GradientText>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 mt-20">
         {posts.map((post) => (
