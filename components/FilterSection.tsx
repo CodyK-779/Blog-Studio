@@ -83,8 +83,8 @@ const FilterSection = ({ mt }: Props) => {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="desc">Latest</SelectItem>
-                  <SelectItem value="asc">Oldest</SelectItem>
+                  <SelectItem value="desc">Newest</SelectItem>
+                  <SelectItem value="asc">Latest</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

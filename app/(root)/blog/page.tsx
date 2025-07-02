@@ -1,6 +1,7 @@
 import BlogSection from "@/components/BlogSection";
 import FilterSection, { FilterType } from "@/components/FilterSection";
 import HeroSection from "@/components/HeroSection";
+import Parallax from "@/components/Parallax";
 import { Categories } from "@/lib/generated/prisma";
 
 export default async function BlogPage({
@@ -19,6 +20,7 @@ export default async function BlogPage({
         selectedCategory={selectedCategory}
         selectedFilter={selectedFilter}
       />
+      <Parallax />
     </div>
   );
 }

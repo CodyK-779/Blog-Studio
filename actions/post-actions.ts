@@ -240,3 +240,16 @@ export async function getUserPost(userId: string) {
     throw new Error("Failed to fetch posts")
   }
 }
+
+export async function getAllPosts() {
+  try {
+    const posts = await prisma.post.findMany({
+      take: 15
+    });
+
+    return posts;
+  } catch (error) {
+    console.error("Failed to fetch all posts", error);
+    throw new Error("Failed to fetch all posts");
+  }
+}

@@ -108,7 +108,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
   const restrictLibraryAccess = session ? "/blog/library" : "/login";
 
   return (
-    <div className="container" id="blog-section">
+    <div className="container mb-10" id="blog-section">
       <div className="border-2 border-neutral-300 dark:border-neutral-600 py-8 pb-10 px-1.5 sm:px-4 rounded-xl">
         <GradientText className="font-semibold text-4xl text-center mb-12">
           Blog Section
