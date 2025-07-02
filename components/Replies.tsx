@@ -6,6 +6,7 @@ import { fallbackAvatar, getShortTimeAgo } from "./CommentSection";
 import LikeCmtDelete from "./LikeCmtDelete";
 import { UserDetail } from "@/actions/post-type";
 import { useState } from "react";
+import Link from "next/link";
 
 interface Props {
   user: UserDetail;
@@ -31,12 +32,15 @@ const Replies = ({ user, authorId, postId, replies, replyCount }: Props) => {
       {openView &&
         replies.map((r) => (
           <div key={r.id} className="flex gap-3 mt-2 mb-4">
-            <Avatar className="size-8">
-              <AvatarImage src={r.author.image!} />
-              <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
-                {fallbackAvatar(r.author.name)}
-              </AvatarFallback>
-            </Avatar>
+            <Link href={`/profile/${r.author.id}`}>
+              <Avatar className="size-8">
+                <AvatarImage src={r.author.image!} />
+                <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
+                  {fallbackAvatar(r.author.name)}
+                </AvatarFallback>
+              </Avatar>
+            </Link>
+
             <div className="flex flex-col flex-1">
               <div className="flex items-center">
                 <p className="max-[375px]:text-xs text-sm font-semibold">

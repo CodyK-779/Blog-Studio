@@ -17,12 +17,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
+import { authClient } from "@/lib/auth-client";
 
 interface Props {
   userId: string;
+  text?: boolean;
+  redirectPath: string;
 }
 
-const DeleteUserBtn = ({ userId }: Props) => {
+const DeleteUserBtn = ({ userId, text, redirectPath }: Props) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
@@ -34,7 +37,17 @@ const DeleteUserBtn = ({ userId }: Props) => {
 
       if (results.success) {
         toast.success("User deleted successfully!");
-        router.push("/users");
+        if (redirectPath === "/blog") {
+          await authClient.signOut({
+            fetchOptions: {
+              onSuccess: () => {
+                router.push(redirectPath);
+              },
+            },
+          });
+        } else {
+          router.push("/users");
+        }
       } else {
         toast.error("Failed to delete User.");
       }
@@ -56,6 +69,8 @@ const DeleteUserBtn = ({ userId }: Props) => {
         >
           {isDeleting ? (
             <Loader2Icon className="animate-spin" />
+          ) : text ? (
+            "Delete account"
           ) : (
             <Trash2Icon />
           )}
@@ -65,7 +80,7 @@ const DeleteUserBtn = ({ userId }: Props) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete this account this action cannot be
+            Are you sure you want to delete this account? This action cannot be
             undone. This account will be permanently deleted from the database.
           </AlertDialogDescription>
         </AlertDialogHeader>

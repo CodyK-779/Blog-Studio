@@ -12,7 +12,7 @@ const Footer = () => {
     { title: "Users", link: "/users" },
     {
       title: "Profile",
-      link: `${session ? `/profile/${session.user.id}` : "/profile"}`,
+      link: `${session ? `/profile/${session.user.id}` : "/login"}`,
     },
     {
       title: "Blogs",

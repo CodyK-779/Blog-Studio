@@ -9,6 +9,7 @@ import { CommentsWithRelations } from "@/actions/comment-type";
 import { UserDetail } from "@/actions/post-type";
 import Replies from "./Replies";
 import { useState } from "react";
+import Link from "next/link";
 
 interface Props {
   user: UserDetail;
@@ -45,12 +46,15 @@ const CommentSection = ({ user, authorId, postId, comments }: Props) => {
       {comments.length > 0 ? (
         comments.map((cmt) => (
           <div key={cmt.id} className="flex gap-3 mb-8">
-            <Avatar>
-              <AvatarImage src={cmt.author.image!} />
-              <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
-                {fallbackAvatar(cmt.author.name)}
-              </AvatarFallback>
-            </Avatar>
+            <Link href={`/profile/${cmt.author.id}`}>
+              <Avatar>
+                <AvatarImage src={cmt.author.image!} />
+                <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
+                  {fallbackAvatar(cmt.author.name)}
+                </AvatarFallback>
+              </Avatar>
+            </Link>
+
             <div className="flex flex-col flex-1">
               <div className="flex items-center">
                 <p className="text-sm font-semibold">{cmt.author.name}</p>

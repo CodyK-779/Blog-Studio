@@ -44,10 +44,6 @@ export default async function UsersPage() {
           className="text-center text-lg sm:text-2xl font-semibold"
           words={generateWords}
         />
-        {/* <p className="">
-          These are all the users who joined{" "}
-          <span className="text-blue-600 dark:text-red-500">Next-Blog</span>
-        </p> */}
       </div>
       <div className="flex flex-col gap-5 mt-20 max-w-4xl w-full mx-auto">
         {users.map((user) => (
@@ -90,7 +86,7 @@ export default async function UsersPage() {
                   </Link>
                 </Button>
                 {specificUser?.role === "Admin" && user.role !== "Admin" && (
-                  <DeleteUserBtn userId={user.id} />
+                  <DeleteUserBtn userId={user.id} redirectPath="/users" />
                 )}
               </div>
             </CardContent>

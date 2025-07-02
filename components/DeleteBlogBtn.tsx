@@ -74,8 +74,8 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete this post this action cannot be
-            undone
+            Are you sure you want to delete this post?. This action cannot be
+            undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

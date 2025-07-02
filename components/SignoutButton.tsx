@@ -5,7 +5,18 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Loader2Icon } from "lucide-react";
+import { Loader2Icon, Trash2Icon } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
 
 const SignoutButton = () => {
   const [isPending, setIsPending] = useState(false);
@@ -30,20 +41,42 @@ const SignoutButton = () => {
   };
 
   return (
-    <Button
-      onClick={handleClick}
-      disabled={isPending}
-      className="font-medium bg-red-500 hover:bg-red-600 flex items-center text-white w-fit gap-2"
-    >
-      {isPending ? (
-        <>
-          <Loader2Icon className="animate-spin" />
-          Loading...
-        </>
-      ) : (
-        <>Sign Out</>
-      )}
-    </Button>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button
+          className="font-medium bg-red-500 hover:bg-red-600 flex items-center text-white w-fit gap-2"
+          disabled={isPending}
+        >
+          {isPending ? (
+            <>
+              <Loader2Icon className="animate-spin" />
+              Loading...
+            </>
+          ) : (
+            <>Sign Out</>
+          )}
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
+          <AlertDialogDescription>
+            Are you sure you want to signout?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel className="bg-black hover:bg-neutral-800 hover:text-white text-white dark:bg-white dark:hover:bg-opacity-90 dark:text-black">
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction
+            onClick={handleClick}
+            className="bg-red-500 hover:bg-red-700 text-white"
+          >
+            Confirm
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

@@ -115,8 +115,8 @@ const LikeCmtDelete = ({ user, comment, postId, authorId, small }: Props) => {
             <AlertDialogHeader>
               <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
               <AlertDialogDescription>
-                Are you sure you want to delete this comment this action cannot
-                be undone
+                Are you sure you want to delete this comment? This action cannot
+                be undone.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

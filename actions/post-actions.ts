@@ -222,3 +222,21 @@ export async function toggleLike(postId: string) {
     return { success: false, error: "Failed to toggle like" };
   }
 }
+
+export async function getUserPost(userId: string) {
+  try {
+    const posts = await prisma.post.findMany({
+      where: {
+        authorId: userId
+      },
+      include: {
+        author: true
+      }
+    });
+
+    return posts;
+  } catch (error) {
+    console.error("Failed to fetch posts", error);
+    throw new Error("Failed to fetch posts")
+  }
+}
