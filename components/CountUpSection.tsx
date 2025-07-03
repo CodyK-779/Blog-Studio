@@ -7,7 +7,7 @@ const CountUpSection = async () => {
   const users = await prisma.user.count();
 
   return (
-    <div className="container mt-10">
+    <div className="container mt-10 py-8">
       <Card className="max-w-5xl mx-auto border-neutral-300 border-2 dark:border-neutral-600">
         <CardHeader>
           <h1 className="text-center font-bold text-3xl text-red-500 dark:text-blue-600">

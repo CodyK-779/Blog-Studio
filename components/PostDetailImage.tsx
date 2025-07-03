@@ -27,7 +27,7 @@ const PostDetailImage = ({ postImage, postTitle }: Props) => {
   return (
     <div
       className={`relative w-full aspect-video rounded-xl overflow-hidden border-4 ${
-        isTallImage ? "aspect-[4/4]" : "aspect-video"
+        isTallImage ? "aspect-[3/4]" : "aspect-video"
       }`}
     >
       <Image

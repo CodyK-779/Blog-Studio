@@ -3,6 +3,7 @@ import Carousel from "@/components/Carousel";
 import CountUpSection from "@/components/CountUpSection";
 import FilterSection, { FilterType } from "@/components/FilterSection";
 import HeroSection from "@/components/HeroSection";
+import Kanye from "@/components/Kanye";
 import Parallax from "@/components/Parallax";
 import { Categories } from "@/lib/generated/prisma";
 
@@ -25,6 +26,7 @@ export default async function BlogPage({
       <Parallax />
       <Carousel />
       <CountUpSection />
+      <Kanye />
     </div>
   );
 }

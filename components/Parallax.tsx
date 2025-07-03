@@ -2,7 +2,7 @@ import { getAllPosts } from "@/actions/post-actions";
 import { HeroParallax } from "./ui/hero-parallax";
 
 const Parallax = async () => {
-  const posts = await getAllPosts(true);
+  const posts = await getAllPosts();
 
   const products = posts.map((post) => ({
     title: post.title,
