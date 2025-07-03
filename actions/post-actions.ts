@@ -52,7 +52,8 @@ export async function getPost(selectedFilter: "asc" | "desc", selectedCategory?:
           select: {
             name: true,
             image: true,
-            role: true
+            role: true,
+            email: true
           }
         },
       },

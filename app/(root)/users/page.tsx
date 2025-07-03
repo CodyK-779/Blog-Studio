@@ -9,6 +9,8 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Link from "next/link";
+import { creator } from "../blog/page";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 export default async function UsersPage() {
   const session = await auth.api.getSession({
@@ -44,8 +46,27 @@ export default async function UsersPage() {
           className="text-center text-lg sm:text-2xl font-semibold"
           words={generateWords}
         />
+
+        <div className="flex items-center justify-center mt-6 gap-4">
+          <HoverBorderGradient className="px-4 py-2">
+            <div className="flex items-center gap-2">
+              <i className="ri-vip-crown-fill text-yellow-400"></i>
+              <p>
+                = <span className="ml-1">Creator</span>
+              </p>
+            </div>
+          </HoverBorderGradient>
+          <HoverBorderGradient className="px-4 py-2">
+            <div className="flex items-center gap-2">
+              <i className="ri-vip-crown-fill text-gray-200"></i>
+              <p>
+                = <span className="ml-1">Admin</span>
+              </p>
+            </div>
+          </HoverBorderGradient>
+        </div>
       </div>
-      <div className="flex flex-col gap-5 mt-20 max-w-4xl w-full mx-auto">
+      <div className="flex flex-col gap-5 mt-12 max-w-4xl w-full mx-auto">
         {users.map((user) => (
           <Card
             key={user.id}
@@ -63,7 +84,13 @@ export default async function UsersPage() {
                   <div className="flex items-center">
                     <p>{user.name}</p>
                     {user.role === "Admin" && (
-                      <i className="ri-vip-crown-fill text-yellow-400 ml-2"></i>
+                      <i
+                        className={`ri-vip-crown-fill ${
+                          user.email === creator
+                            ? "text-yellow-400"
+                            : "text-gray-200"
+                        }  ml-2`}
+                      ></i>
                     )}
                     <p className="ml-2 text-xs text-neutral-500 dark:text-neutral-400 max-[450px]:hidden">
                       <span className="mr-2">•</span> joined in{" "}

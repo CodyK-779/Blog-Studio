@@ -10,7 +10,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <div>
+    <div suppressHydrationWarning>
       <Navbar setOpenMenu={setOpenMenu} />
       {openMenu && <Overlay setOpenMenu={setOpenMenu} />}
       <Sidebar openMenu={openMenu} setOpenMenu={setOpenMenu} />

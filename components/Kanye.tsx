@@ -1,6 +1,6 @@
 const Kanye = () => {
   return (
-    <div className="w-full mt-10 py-16 bg-neutral-50 dark:bg-neutral-900">
+    <div className="w-full mt-10 py-16 bg-neutral-100 dark:bg-neutral-900">
       <div className="max-w-6xl mx-auto px-4 flex flex-col-reverse md:flex-row items-center gap-12 md:gap-20">
         <div className="flex-1 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl font-bold leading-snug text-neutral-800 dark:text-white">
@@ -22,7 +22,7 @@ const Kanye = () => {
             <video
               controls
               src="/umm.mp4"
-              className="w-full h-auto object-cover bg-black"
+              className="w-[300px] place-self-center h-auto object-cover bg-black"
             />
           </div>
         </div>
@@ -32,7 +32,3 @@ const Kanye = () => {
 };
 
 export default Kanye;
-
-/*
-
-*/

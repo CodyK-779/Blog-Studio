@@ -13,6 +13,7 @@ import { getUser } from "@/actions/user-actions";
 import DeleteBlogBtn from "./DeleteBlogBtn";
 import GradientText from "./ui/GradientText";
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
+import { creator } from "@/app/(root)/blog/page";
 
 interface Props {
   selectedCategory?: Categories;
@@ -133,7 +134,13 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                       <div className="flex items-center gap-2">
                         <p>{post.author.name}</p>
                         {post.author.role === "Admin" && (
-                          <i className="ri-vip-crown-fill text-yellow-400"></i>
+                          <i
+                            className={`ri-vip-crown-fill ${
+                              post.author.email === creator
+                                ? "text-yellow-400"
+                                : "text-gray-200"
+                            } `}
+                          ></i>
                         )}
                       </div>
                       <p>{formattedDate(post.createdAt)}</p>

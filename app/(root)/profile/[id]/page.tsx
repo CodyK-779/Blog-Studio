@@ -16,6 +16,7 @@ import { auth } from "@/lib/auth";
 import { ArrowLeftIcon, CalendarDays } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
+import { creator } from "../../blog/page";
 
 export default async function ProfilePage({
   params,
@@ -72,7 +73,13 @@ export default async function ProfilePage({
               <h3 className="font-semibold text-lg sm:text-xl">{user.name}</h3>
               {user.role === "Admin" && (
                 <div className="flex items-center gap-2">
-                  <i className="ri-vip-crown-fill text-yellow-400 ml-2"></i>
+                  <i
+                    className={`ri-vip-crown-fill ${
+                      user.email === creator
+                        ? "text-yellow-400"
+                        : "text-gray-200"
+                    } ml-2`}
+                  ></i>
                   <p className="text-sm font-semibold">
                     {user.email === "khantzawthein81@gmail.com"
                       ? "Creator"

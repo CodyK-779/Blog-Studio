@@ -5,7 +5,10 @@ import FilterSection, { FilterType } from "@/components/FilterSection";
 import HeroSection from "@/components/HeroSection";
 import Kanye from "@/components/Kanye";
 import Parallax from "@/components/Parallax";
+import Testimonials from "@/components/Testimonials";
 import { Categories } from "@/lib/generated/prisma";
+
+export const creator = "khantzawthein81@gmail.com";
 
 export default async function BlogPage({
   searchParams,
@@ -27,6 +30,7 @@ export default async function BlogPage({
       <Carousel />
       <CountUpSection />
       <Kanye />
+      <Testimonials />
     </div>
   );
 }

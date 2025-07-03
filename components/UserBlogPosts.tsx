@@ -8,6 +8,7 @@ import Image from "next/image";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { getUser } from "@/actions/user-actions";
+import { creator } from "@/app/(root)/blog/page";
 
 interface Props {
   userId: string;
@@ -48,7 +49,13 @@ const UserBlogPosts = async ({ userId }: Props) => {
                   <div className="flex items-center gap-2">
                     <p>{post.author.name}</p>
                     {post.author.role === "Admin" && (
-                      <i className="ri-vip-crown-fill text-yellow-400"></i>
+                      <i
+                        className={`ri-vip-crown-fill ${
+                          post.author.email === creator
+                            ? "text-yellow-400"
+                            : "text-gray-200"
+                        }`}
+                      ></i>
                     )}
                   </div>
                   <p>{formattedDate(post.createdAt)}</p>
