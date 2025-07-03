@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import ProfileDropdown from "./ProfileDropdown";
 import { authClient } from "@/lib/auth-client";
 import logo from "@/public/camera.png";
+import f from "../public/camera.png";
 import Image from "next/image";
 import GradientText from "./ui/GradientText";
 
