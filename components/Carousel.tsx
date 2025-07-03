@@ -6,7 +6,6 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import GradientText from "./ui/GradientText";
-import d from "@/public/foods.jpg";
 
 const carouselData = [
   {
@@ -32,7 +31,7 @@ const carouselData = [
   {
     category: "Memes",
     title: "Share dumb and funny memes.",
-    image: "memes.jpg",
+    image: "/memes.jpg",
   },
   {
     category: "Food",
@@ -70,8 +69,8 @@ const CarouselSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselNext className="bg-neutral-800 text-white" />
-          <CarouselPrevious className="bg-neutral-800 text-white" />
+          <CarouselNext className="bg-neutral-800 hover:bg-neutral-900 text-white" />
+          <CarouselPrevious className="bg-neutral-800 hover:bg-neutral-900 text-white" />
         </Carousel>
       </div>
     </div>

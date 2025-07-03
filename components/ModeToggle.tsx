@@ -10,6 +10,11 @@ export function ModeToggle() {
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
+    if (theme === "dark") {
+      window.alert(
+        "If you like Light mode you're a Fucking Weirdo just use Dark theme for Better Experience"
+      );
+    }
   };
 
   return (

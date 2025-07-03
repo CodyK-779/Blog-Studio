@@ -1,5 +1,6 @@
 import BlogSection from "@/components/BlogSection";
 import Carousel from "@/components/Carousel";
+import CountUpSection from "@/components/CountUpSection";
 import FilterSection, { FilterType } from "@/components/FilterSection";
 import HeroSection from "@/components/HeroSection";
 import Parallax from "@/components/Parallax";
@@ -23,6 +24,7 @@ export default async function BlogPage({
       />
       <Parallax />
       <Carousel />
+      <CountUpSection />
     </div>
   );
 }
