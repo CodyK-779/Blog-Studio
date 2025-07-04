@@ -156,13 +156,13 @@ const CreateForm = () => {
         </div>
       </CardContent>
 
-      <CardFooter className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+      <CardFooter className="flex flex-col sm:flex-row items-center justify-between gap-8">
+        <div className="flex w-full items-center justify-between sm:justify-start gap-2">
           <Select
             onValueChange={(value: Categories) => setSelectedValue(value)}
             value={selectedValue}
           >
-            <SelectTrigger className={`w-[180px] ${inputStyles}`}>
+            <SelectTrigger className={`w-[170px] sm:w-[180px] ${inputStyles}`}>
               <SelectValue
                 className="font-medium"
                 placeholder="Select a Category?"

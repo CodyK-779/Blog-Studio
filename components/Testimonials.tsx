@@ -44,6 +44,13 @@ const testimonials = [
     designation: "President of the United States",
     src: "/trump.webp",
   },
+  {
+    quote:
+      "After i order my nuclear scientists to invent some nukes i visit this website. It is so good, it almost distracted me from war!",
+    name: "Kim Jong Uh",
+    designation: "Supreme leader of North Korea",
+    src: "/kim.jpeg",
+  },
 ];
 
 const Testimonials = () => {

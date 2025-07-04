@@ -59,7 +59,7 @@ const SignoutButton = () => {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
+          <AlertDialogTitle>Signout Confirmation</AlertDialogTitle>
           <AlertDialogDescription>
             Are you sure you want to signout?
           </AlertDialogDescription>

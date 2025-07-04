@@ -6,9 +6,9 @@ import { Button } from "./ui/button";
 import ProfileDropdown from "./ProfileDropdown";
 import { authClient } from "@/lib/auth-client";
 import logo from "@/public/camera.png";
-import f from "../public/camera.png";
 import Image from "next/image";
 import GradientText from "./ui/GradientText";
+import { usePathname } from "next/navigation";
 
 interface Props {
   setOpenMenu: (openMenu: boolean) => void;
@@ -16,6 +16,7 @@ interface Props {
 
 const Navbar = ({ setOpenMenu }: Props) => {
   const { data: session } = authClient.useSession();
+  const pathname = usePathname();
   const fallbackAvatar = session && session.user.name.charAt(0).toUpperCase();
 
   const navLinks = [
@@ -37,21 +38,26 @@ const Navbar = ({ setOpenMenu }: Props) => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/blog" className="flex items-center gap-3">
           <Image src={logo} alt="logo" width={36} height={36} />
-          {/* <h1 className="text-2xl sm:text-3xl font-bold">Blog Studio</h1> */}
           <GradientText className="max-[400px]:text-2xl text-3xl font-bold">
             Blog Studio
           </GradientText>
         </Link>
         <ul className="hidden cm:flex items-center gap-12">
-          {navLinks.map((link) => (
-            <Link
-              key={link.link}
-              href={link.link}
-              className="font-semibold hover:text-red-500 dark:hover:text-blue-500 transition-colors duration-150"
-            >
-              {link.title}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.link;
+
+            return (
+              <Link
+                key={link.link}
+                href={link.link}
+                className={`font-semibold ${
+                  isActive && "text-red-500 dark:text-blue-600"
+                } hover:text-red-500 dark:hover:text-blue-500 transition-colors duration-150`}
+              >
+                {link.title}
+              </Link>
+            );
+          })}
         </ul>
         <div className="hidden cm:flex items-center gap-6">
           {!session ? (

@@ -22,11 +22,15 @@ const HeroButtons = () => {
       <Button
         size="lg"
         asChild
-        className="font-semibold text-md bg-red-500 hover:bg-red-600 dark:bg-blue-600 dark:text-black dark:hover:bg-blue-700 transition-colors duration-150 ease-in"
+        className="font-semibold px-4 py-1 sm:px-6 sm:py-3 text-md bg-red-500 hover:bg-red-600 dark:bg-blue-600 dark:text-black dark:hover:bg-blue-700 transition-colors duration-150 ease-in"
       >
         <Link href={createRestrict}>Get Started</Link>
       </Button>
-      <Button size="lg" className="font-semibold text-md" asChild>
+      <Button
+        size="lg"
+        className="font-semibold text-md px-4 py-1 sm:px-6 sm:py-3"
+        asChild
+      >
         <Link href="#blog-section">Explore</Link>
       </Button>
     </motion.div>

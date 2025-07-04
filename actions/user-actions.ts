@@ -53,3 +53,15 @@ export async function deleteUser(userId: string) {
     throw new Error("Failed to delete user")
   }
 }
+
+export async function getUserId(userId: string) {
+  if (!userId) return;
+
+  const users = await prisma.user.findUnique({
+    where: {
+      id: userId
+    }
+  });
+
+  return users;
+}

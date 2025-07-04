@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
@@ -22,7 +23,7 @@ const ProfileDropdown = ({ userImg, fallbackAvatar }: Props) => {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="flex items-center justify-center">
         <SignoutButton />
       </DropdownMenuContent>
     </DropdownMenu>

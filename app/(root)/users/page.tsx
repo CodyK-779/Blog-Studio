@@ -48,11 +48,11 @@ export default async function UsersPage() {
         />
 
         <div className="flex items-center justify-center mt-6 gap-4">
-          <HoverBorderGradient className="px-4 py-2">
+          <HoverBorderGradient className="px-3 sm:px-4 py-2">
             <div className="flex items-center gap-2">
               <i className="ri-vip-crown-fill text-yellow-400"></i>
               <p>
-                = <span className="ml-1">Creator</span>
+                = <span className="ml-1 font-medium">Creator</span>
               </p>
             </div>
           </HoverBorderGradient>
@@ -60,7 +60,7 @@ export default async function UsersPage() {
             <div className="flex items-center gap-2">
               <i className="ri-vip-crown-fill text-gray-200"></i>
               <p>
-                = <span className="ml-1">Admin</span>
+                = <span className="ml-1 font-medium">Admin</span>
               </p>
             </div>
           </HoverBorderGradient>

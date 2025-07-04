@@ -79,7 +79,8 @@ export async function getPostDetails(id: string) {
             id: true,
             name: true,
             image: true,
-            role: true
+            role: true,
+            email: true
           }
         },
         comment: {
@@ -253,4 +254,16 @@ export async function getAllPosts() {
     console.error("Failed to fetch all posts", error);
     throw new Error("Failed to fetch all posts");
   }
+}
+
+export async function getPostId(postId: string) {
+  if (!postId) return;
+
+  const posts = await prisma.post.findUnique({
+    where: {
+      id: postId
+    }
+  });
+
+  return posts;
 }

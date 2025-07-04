@@ -18,6 +18,10 @@ interface Props {
   comments: CommentsWithRelations;
 }
 
+export const creator = "HED1SRE3tyMtxs5a4op36R22E7Do5fCe";
+
+console.log(creator);
+
 export const fallbackAvatar = (authorName: string) => {
   return authorName.charAt(0).toUpperCase();
 };
@@ -59,7 +63,13 @@ const CommentSection = ({ user, authorId, postId, comments }: Props) => {
               <div className="flex items-center">
                 <p className="text-sm font-semibold">{cmt.author.name}</p>
                 {cmt.author.role === "Admin" && (
-                  <i className="ri-vip-crown-fill text-yellow-400 ml-2"></i>
+                  <i
+                    className={`ri-vip-crown-fill ${
+                      cmt.author.id === creator
+                        ? "text-yellow-400"
+                        : "text-gray-200"
+                    } ml-2`}
+                  ></i>
                 )}
                 <p className="text-xs font-medium text-neutral-500 dark:text-neutral-300">
                   <span className="mx-2">•</span>

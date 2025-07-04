@@ -1,4 +1,4 @@
-import { getUser } from "@/actions/user-actions";
+import { getUser, getUserId } from "@/actions/user-actions";
 import { fallbackAvatar, formattedDate } from "@/components/BlogSection";
 import DeleteUserBtn from "@/components/DeleteUserBtn";
 import SignoutButton from "@/components/SignoutButton";
@@ -17,6 +17,7 @@ import { ArrowLeftIcon, CalendarDays } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { creator } from "../../blog/page";
+import { notFound } from "next/navigation";
 
 export default async function ProfilePage({
   params,
@@ -28,6 +29,11 @@ export default async function ProfilePage({
     headers: await headers(),
   });
 
+  const userCheck = await getUserId(userId);
+  if (!userCheck) {
+    return notFound();
+  }
+
   if (!session) return null;
 
   const user = await getUser(userId);
@@ -36,10 +42,7 @@ export default async function ProfilePage({
   if (!user) return null;
 
   return (
-    <div className="container">
-      {/* <GradientText className="font-bold text-center text-5xl mt-10">
-        User Profile
-      </GradientText> */}
+    <div className="max-w-7xl mx-auto px-1 sm:px-4">
       <h1 className="text-5xl font-bold text-center mt-10 text-red-500 dark:text-blue-600">
         User Profile
       </h1>
@@ -123,7 +126,7 @@ export default async function ProfilePage({
           )}
         </Card>
       </div>
-      <div className="w-full border-t-2 border-neutral-300 dark:border-neutral-500">
+      <div className="w-full border-t-2 border-neutral-300 dark:border-neutral-500 px-1">
         {user._count.post > 0 ? (
           <UserBlogPosts userId={user.id} />
         ) : (

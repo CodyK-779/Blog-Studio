@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import SignoutButton from "./SignoutButton";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface Props {
   openMenu: boolean;
@@ -17,6 +18,7 @@ const sidebarStyles =
 
 const Sidebar = ({ openMenu, setOpenMenu }: Props) => {
   const { data: session } = useSession();
+  const pathname = usePathname();
 
   const navLinks = [
     { title: "Home", link: "/blog" },
@@ -67,16 +69,22 @@ const Sidebar = ({ openMenu, setOpenMenu }: Props) => {
         </div>
       )}
       <ul className="flex flex-col items-center justify-center gap-6 mt-60">
-        {navLinks.map((link) => (
-          <Link
-            key={link.title}
-            href={link.link}
-            onClick={() => setOpenMenu(false)}
-            className="font-semibold hover:text-red-500 dark:hover:text-blue-500 transition-colors duration-150"
-          >
-            {link.title}
-          </Link>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = pathname === link.link;
+
+          return (
+            <Link
+              key={link.title}
+              href={link.link}
+              onClick={() => setOpenMenu(false)}
+              className={`font-semibold ${
+                isActive && "text-red-500 dark:text-blue-600"
+              } hover:text-red-500 dark:hover:text-blue-500 transition-colors duration-150`}
+            >
+              {link.title}
+            </Link>
+          );
+        })}
       </ul>
       {session ? (
         <div className="flex items-center justify-center pt-20">

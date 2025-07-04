@@ -1,4 +1,4 @@
-import { getPostDetails } from "@/actions/post-actions";
+import { getPostDetails, getPostId } from "@/actions/post-actions";
 import { getUser } from "@/actions/user-actions";
 import {
   badgeType,
@@ -16,7 +16,8 @@ import { Categories } from "@/lib/generated/prisma";
 import { ArrowLeft } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { creator } from "../page";
 
 export default async function BlogPageDetails({
   params,
@@ -30,6 +31,12 @@ export default async function BlogPageDetails({
   });
 
   if (!session) redirect("/login");
+
+  const idCheck = await getPostId(postId);
+
+  if (!idCheck) {
+    return notFound();
+  }
 
   const posts = await getPostDetails(postId);
 
@@ -79,7 +86,13 @@ export default async function BlogPageDetails({
                       {post.author.name}
                     </p>
                     {post.author.role === "Admin" && (
-                      <i className="ri-vip-crown-fill text-yellow-400"></i>
+                      <i
+                        className={`ri-vip-crown-fill ${
+                          post.author.email === creator
+                            ? "text-yellow-400"
+                            : "text-gray-200"
+                        }`}
+                      ></i>
                     )}
                   </div>
                   <p className="text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-300">

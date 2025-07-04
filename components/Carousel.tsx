@@ -69,8 +69,8 @@ const CarouselSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselNext className="bg-neutral-800 hover:bg-neutral-900 text-white" />
-          <CarouselPrevious className="bg-neutral-800 hover:bg-neutral-900 text-white" />
+          <CarouselNext className="bg-neutral-800 hover:bg-neutral-900 hover:text-white text-white" />
+          <CarouselPrevious className="bg-neutral-800 hover:bg-neutral-900 hover:text-white text-white" />
         </Carousel>
       </div>
     </div>

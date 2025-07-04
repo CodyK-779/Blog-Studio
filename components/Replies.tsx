@@ -2,7 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { RepliesWithRelations } from "@/actions/comment-type";
-import { fallbackAvatar, getShortTimeAgo } from "./CommentSection";
+import { creator, fallbackAvatar, getShortTimeAgo } from "./CommentSection";
 import LikeCmtDelete from "./LikeCmtDelete";
 import { UserDetail } from "@/actions/post-type";
 import { useState } from "react";
@@ -47,7 +47,13 @@ const Replies = ({ user, authorId, postId, replies, replyCount }: Props) => {
                   {r.author.name}
                 </p>
                 {r.author.role === "Admin" && (
-                  <i className="ri-vip-crown-fill text-yellow-400 ml-2"></i>
+                  <i
+                    className={`ri-vip-crown-fill ml-2 ${
+                      r.author.id === creator
+                        ? "text-yellow-400"
+                        : "text-gray-200"
+                    }`}
+                  ></i>
                 )}
                 <p className="text-xs font-medium text-neutral-500 dark:text-neutral-300">
                   <span className="mx-2">•</span>
