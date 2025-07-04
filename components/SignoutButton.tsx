@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Loader2Icon, Trash2Icon } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,

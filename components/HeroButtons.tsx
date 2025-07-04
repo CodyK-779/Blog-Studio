@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { useSession } from "@/lib/auth-client";
