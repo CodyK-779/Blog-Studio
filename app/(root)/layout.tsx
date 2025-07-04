@@ -6,6 +6,8 @@ import Overlay from "@/components/Overlay";
 import Sidebar from "@/components/Sidebar";
 import { useState } from "react";
 
+export const runtime = "nodejs";
+
 export default function RootLayout({ children }: React.PropsWithChildren) {
   const [openMenu, setOpenMenu] = useState(false);
 

@@ -6,8 +6,6 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
-export const runtime = "nodejs";
-
 export async function createPost(content: string, title: string, subTitle?: string, selectedValue?: Categories, uploadImage?: string) {
   try {
     const session = await auth.api.getSession({
