@@ -42,11 +42,7 @@ const Navbar = ({ setOpenMenu }: Props) => {
             Blog Studio
           </GradientText>
         </Link>
-        <ul
-          className={`hidden ${
-            session ? "cm:flex" : "lg:flex"
-          } items-center gap-12`}
-        >
+        <ul className="hidden lg:flex items-center gap-12">
           {navLinks.map((link) => {
             const isActive = pathname === link.link;
 
@@ -63,11 +59,7 @@ const Navbar = ({ setOpenMenu }: Props) => {
             );
           })}
         </ul>
-        <div
-          className={`hidden ${
-            session ? "cm:flex" : "lg:flex"
-          }  items-center gap-6`}
-        >
+        <div className="hidden lg:flex items-center gap-6">
           {!session ? (
             <Button asChild>
               <Link href="/login" className="font-semibold">
@@ -83,7 +75,7 @@ const Navbar = ({ setOpenMenu }: Props) => {
           <ModeToggle />
         </div>
         <div
-          className={`${session ? "cm:hidden" : "lg:hidden"} cursor-pointer`}
+          className="lg:hidden cursor-pointer"
           onClick={() => setOpenMenu(true)}
         >
           <i className="ri-menu-2-line text-2xl"></i>
