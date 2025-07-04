@@ -105,6 +105,8 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
     headers: await headers(),
   });
 
+  if (!posts) return null;
+
   const currentUser = session ? await getUser(session.user.id) : null;
   const restrictLibraryAccess = session ? "/blog/library" : "/login";
 

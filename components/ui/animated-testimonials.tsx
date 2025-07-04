@@ -50,7 +50,12 @@ export const AnimatedTestimonials = ({
   return (
     <div className="mx-auto max-w-sm px-4 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
       <div className="relative grid grid-cols-1 sm:gap-20 gap-12 md:grid-cols-2">
-        <div>
+        <motion.div
+          initial={{ x: -80, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 2 }}
+          viewport={{ once: true }}
+        >
           <div className="relative h-80 w-full">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
@@ -96,9 +101,15 @@ export const AnimatedTestimonials = ({
               ))}
             </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col justify-between py-4">
+        <motion.div
+          initial={{ x: 80, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 2 }}
+          viewport={{ once: true }}
+          className="flex flex-col justify-between py-4"
+        >
           <motion.div
             key={active}
             initial={{ y: 20, opacity: 0 }}
@@ -153,7 +164,7 @@ export const AnimatedTestimonials = ({
               <IconArrowRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

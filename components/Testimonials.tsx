@@ -39,17 +39,17 @@ const testimonials = [
   },
   {
     quote:
-      "This blog is absolutely incredible. People are talking about it—tremendous design, amazing content. I’ve seen a lot of blogs—believe me—and this one? It's the best. Everybody loves it.",
+      "This website is absolutely incredible. People are talking about it—tremendous design, amazing content. I’ve seen a lot of blogs—believe me—and this one? It's the best. Everybody loves it.",
     name: "Donald Trump",
     designation: "President of the United States",
     src: "/trump.webp",
   },
   {
     quote:
-      "After i order my nuclear scientists to invent some nukes i visit this website. It is so good, it almost distracted me from war!",
-    name: "Kim Jong Uh",
-    designation: "Supreme leader of North Korea",
-    src: "/kim.jpeg",
+      "Amazing website props to my brother Khant zaw thein he did an amazing job, 10/10 highly recommand i can post my gym workout and motivate others.",
+    name: "Giga Chad",
+    designation: "Absolute being",
+    src: "/chad.jpg",
   },
 ];
 

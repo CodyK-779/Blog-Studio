@@ -1,0 +1,5 @@
+# Ignore generated files
+lib/generated/
+prisma/generated/
+node_modules/
+.next/
