@@ -38,6 +38,7 @@ const SignoutButton = () => {
         },
       },
     });
+    router.push("/login");
   };
 
   return (
