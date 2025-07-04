@@ -23,22 +23,17 @@ const SignoutButton = () => {
   const router = useRouter();
 
   const handleClick = async () => {
-    await signOut({
-      fetchOptions: {
-        onRequest: () => setIsPending(true),
-        onResponse: () => {
-          setIsPending(false);
-        },
-        onError: (cxt) => {
-          toast.error(cxt.error.message);
-        },
-        onSuccess: () => {
-          toast.success("User Signed out successfully!");
-          router.push("/login");
-        },
-      },
-    });
-    router.push("/login");
+    setIsPending(true);
+
+    try {
+      await signOut();
+      router.push("/login");
+      toast.success("User Signed out successfully!");
+    } catch (error) {
+      toast.error("Sign out failed");
+    } finally {
+      setIsPending(false);
+    }
   };
 
   return (

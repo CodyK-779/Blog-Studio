@@ -7,16 +7,18 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
 export async function createPost(content: string, title: string, subTitle?: string, selectedValue?: Categories, uploadImage?: string) {
-  const session = await auth.api.getSession({
-    headers: await headers()
-  });
-
-  const userId = session?.user.id;
-
-  if (!userId) return; 
-
   try {
-    const post = await prisma.post.create({
+    const session = await auth.api.getSession({
+    headers: await headers()
+    });
+
+    if (!session) return;
+
+    const userId = session.user.id;
+
+    if (!userId) return;
+
+    await prisma.post.create({
       data: {
         title,
         content,
@@ -27,8 +29,7 @@ export async function createPost(content: string, title: string, subTitle?: stri
       }
     })
 
-    revalidatePath('/')
-    return { success: true, post }
+    return { success: true }
   } catch (error) {
     console.error(error)
   }

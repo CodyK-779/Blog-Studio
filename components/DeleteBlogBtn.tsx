@@ -59,7 +59,7 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
       <AlertDialogTrigger asChild>
         <Button
           variant="destructive"
-          className="bg-red-500"
+          className="bg-red-500 relative z-10"
           size="sm"
           disabled={isDeleting}
         >
