@@ -27,7 +27,7 @@ const SignoutButton = () => {
 
     try {
       await signOut();
-      router.push("/login");
+      window.location.href = "/login";
       toast.success("User Signed out successfully!");
     } catch (error) {
       toast.error("Sign out failed");
