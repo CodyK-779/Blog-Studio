@@ -167,10 +167,11 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                 <div className="p-4">
                   <div className="flex items-center justify-between">
                     <Link href={`/blog/${post.id}`}>
-                      <p className="text-2xl font-semibold mb-1 text-red-500 dark:text-blue-600 truncate max-w-[20ch] hover:underline">
+                      <p className="text-2xl font-bold mb-1 text-yellow-400 truncate max-w-[20ch] hover:underline">
                         {post.title}
                       </p>
                     </Link>
+                    {/* text-red-500 dark:text-blue-600 */}
                     {currentUser && currentUser.role === "Admin" && (
                       <DeleteBlogBtn
                         imageUrl={post.image}
@@ -180,11 +181,12 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                     )}
                   </div>
                   {post.subTitle && (
-                    <p className="font-medium mb-1 text-blue-600 dark:text-red-600 truncate max-w-[40ch]">
+                    <p className="font-semibold mb-1 text-neutral-700 dark:text-white truncate max-w-[40ch]">
                       {post.subTitle}
                     </p>
                   )}
-                  <p className="text-sm truncate max-w-[50ch]">
+                  {/* text-blue-600 dark:text-red-600 */}
+                  <p className="text-sm font-medium truncate max-w-[50ch] text-neutral-500 dark:text-neutral-400">
                     {post.content}
                   </p>
                 </div>
