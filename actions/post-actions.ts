@@ -236,6 +236,19 @@ export async function getUserPost(userId: string) {
   }
 }
 
+export async function getPostId(postId: string) {
+  if (!postId) return;
+
+  const posts = await prisma.post.findUnique({
+    where: {
+      id: postId
+    }
+  });
+
+  return posts;
+}
+
+/*
 export async function getAllPosts() {
   try {
     const posts = await prisma.post.findMany({
@@ -248,15 +261,4 @@ export async function getAllPosts() {
     throw new Error("Failed to fetch all posts");
   }
 }
-
-export async function getPostId(postId: string) {
-  if (!postId) return;
-
-  const posts = await prisma.post.findUnique({
-    where: {
-      id: postId
-    }
-  });
-
-  return posts;
-}
+*/
