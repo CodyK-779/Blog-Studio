@@ -42,6 +42,7 @@ export async function getPost(selectedFilter: "asc" | "desc", selectedCategory?:
       include: {
         author: {
           select: {
+            id: true,
             name: true,
             image: true,
             role: true,

@@ -31,19 +31,20 @@ const BlogLibraryList = async ({ selectedCategory, selectedFilter }: Props) => {
       {posts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {posts.map((post) => (
-            <Link
-              href={`/blog/${post.id}`}
+            <div
               key={post.id}
               className="border-neutral-300 border-2 dark:border-neutral-600 shadow-lg rounded-lg dark:bg-neutral-900 hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-transform duration-150 ease-in"
             >
               <div className="flex items-center justify-between px-4 py-3">
                 <div className="flex items-center gap-4">
-                  <Avatar className="cursor-pointer size-8">
-                    <AvatarImage src={post.author.image!} />
-                    <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
-                      {fallbackAvatar(post.author.name)}
-                    </AvatarFallback>
-                  </Avatar>
+                  <Link href={`/profile/${post.author.id}`}>
+                    <Avatar className="cursor-pointer size-8">
+                      <AvatarImage src={post.author.image!} />
+                      <AvatarFallback className="bg-red-500 dark:bg-blue-600 text-white">
+                        {fallbackAvatar(post.author.name)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Link>
                   <div className="flex flex-col text-sm">
                     <div className="flex items-center gap-2">
                       <p>{post.author.name}</p>
@@ -63,21 +64,25 @@ const BlogLibraryList = async ({ selectedCategory, selectedFilter }: Props) => {
                 {post.categories && badgeType(post.categories)}
               </div>
               {post.image && (
-                <div className="relative aspect-video w-full">
-                  <Image
-                    src={post.image}
-                    alt="image"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 768px, 1024px"
-                    className="object-cover"
-                  />
-                </div>
+                <Link href={`/blog/${post.id}`}>
+                  <div className="relative aspect-video w-full">
+                    <Image
+                      src={post.image}
+                      alt="image"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 768px, 1024px"
+                      className="object-cover"
+                    />
+                  </div>
+                </Link>
               )}
               <div className="p-4">
                 <div className="flex items-center justify-between">
-                  <p className="text-2xl font-semibold mb-1 text-red-500 dark:text-blue-600">
-                    {post.title}
-                  </p>
+                  <Link href={`/blog/${post.id}`}>
+                    <p className="text-2xl font-semibold mb-1 text-red-500 dark:text-blue-600 truncate max-w-[15ch] hover:underline">
+                      {post.title}
+                    </p>
+                  </Link>
                   {currentUser && currentUser.role === "Admin" && (
                     <DeleteBlogBtn
                       postId={post.id}
@@ -87,13 +92,13 @@ const BlogLibraryList = async ({ selectedCategory, selectedFilter }: Props) => {
                   )}
                 </div>
                 {post.subTitle && (
-                  <p className="font-medium mb-1 text-blue-600 dark:text-red-600">
+                  <p className="font-medium mb-1 text-blue-600 dark:text-red-600 truncate max-w-[30ch]">
                     {post.subTitle}
                   </p>
                 )}
                 <p className="text-sm truncate max-w-[50ch]">{post.content}</p>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       ) : (

@@ -14,7 +14,7 @@ interface Props {
 }
 
 const sidebarStyles =
-  "cm:hidden fixed z-30 rounded top-0 right-0 min-h-screen w-[300px] max-[400px]:w-full bg-white/60 backdrop-blur-lg dark:bg-neutral-800/70 shadow transform transition-transform duration-300";
+  "lg:hidden fixed z-30 rounded top-0 right-0 min-h-screen w-[300px] max-[400px]:w-full bg-white/60 backdrop-blur-lg dark:bg-neutral-800/70 shadow transform transition-transform duration-300";
 
 const Sidebar = ({ openMenu, setOpenMenu }: Props) => {
   const { data: session } = useSession();
