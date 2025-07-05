@@ -9,14 +9,23 @@ interface Props {
 }
 
 const PostDetailImage = ({ postImage, postTitle }: Props) => {
-  const [isTallImage, setIsTallImage] = useState(false);
+  const [aspectRatio, setAspectRatio] = useState("aspect-video");
 
   useEffect(() => {
     const img = new window.Image();
     img.src = postImage;
 
     img.onload = () => {
-      setIsTallImage(img.height > img.width);
+      const { width, height } = img;
+
+      // Dynamically set aspect ratio class
+      if (height > width) {
+        setAspectRatio("aspect-[3/4]"); // portrait
+      } else if (width > height) {
+        setAspectRatio("aspect-video"); // landscape
+      } else {
+        setAspectRatio("aspect-square"); // square
+      }
     };
 
     img.onerror = () => {
@@ -26,16 +35,15 @@ const PostDetailImage = ({ postImage, postTitle }: Props) => {
 
   return (
     <div
-      className={`relative w-full aspect-video rounded-xl overflow-hidden border-4 ${
-        isTallImage ? "aspect-[4/4]" : "aspect-video"
-      }`}
+      className={`relative w-full ${aspectRatio} rounded-xl overflow-hidden border-4`}
     >
       <Image
         src={postImage}
         alt={postTitle}
         fill
+        priority
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 768px, 1024px"
-        className={isTallImage ? "object-contain" : "object-cover"}
+        className="object-cover"
       />
     </div>
   );
