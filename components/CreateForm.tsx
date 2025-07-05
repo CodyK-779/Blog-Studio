@@ -39,6 +39,7 @@ const CreateForm = () => {
   const { data: session } = useSession();
 
   const [uploadImage, setUploadImage] = useState("");
+  const router = useRouter();
 
   if (!session) return;
 
@@ -76,6 +77,7 @@ const CreateForm = () => {
         setIsPosting(false);
 
         toast.success("Post created successfully!");
+        router.push("/blog/library");
       }
     } catch (error) {
       console.error("Failed to create Post", error);
