@@ -7,7 +7,7 @@ import GradientText from "@/components/ui/GradientText";
 
 export default function LoadingScreen() {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-100 dark:from-[#1e1e1e] dark:to-[#0d0d0d]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-100 dark:bg-neutral-950 dark:from-[#1e1e1e] dark:to-[#0d0d0d]">
       <motion.div
         className="text-4xl md:text-6xl font-extrabold text-white flex gap-2 items-center"
         initial={{ opacity: 0, scale: 0.8 }}

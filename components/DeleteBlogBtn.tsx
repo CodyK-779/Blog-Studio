@@ -30,7 +30,10 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
   const { edgestore } = useEdgeStore();
   const router = useRouter();
 
-  const handleDelete = async (postId: string) => {
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    postId: string
+  ) => {
     setIsDeleting(true);
 
     try {
@@ -83,7 +86,7 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => handleDelete(postId)}
+            onClick={(e) => handleDelete(e, postId)}
             className="bg-red-500 hover:bg-red-700 text-white"
           >
             Confirm

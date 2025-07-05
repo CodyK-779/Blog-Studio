@@ -55,11 +55,10 @@ export default async function ProfilePage({
         </Button>
         <Card className="border-neutral-300 border-2 dark:border-neutral-500">
           {user.email === "khantzawthein81@gmail.com" && (
-            <CardHeader className="flex items-start flex-row justify-center gap-4">
+            <CardHeader className="flex items-center justify-center">
               <GradientText className="font-bold text-3xl">
                 Creator
               </GradientText>
-              <i className="ri-vip-crown-fill text-2xl text-yellow-400"></i>
             </CardHeader>
           )}
           <CardContent className="flex flex-col justify-center py-4">
