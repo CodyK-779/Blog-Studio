@@ -167,7 +167,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                 <div className="p-4">
                   <div className="flex items-center justify-between">
                     <Link href={`/blog/${post.id}`}>
-                      <p className="text-2xl font-bold mb-1 text-yellow-400 truncate max-w-[20ch] hover:underline">
+                      <p className="text-2xl font-bold mb-1 text-yellow-400 truncate max-w-[15ch] hover:underline">
                         {post.title}
                       </p>
                     </Link>
