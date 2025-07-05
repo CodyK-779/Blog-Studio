@@ -9,8 +9,8 @@ import { headers } from "next/headers";
 export async function createPost(content: string, title: string, subTitle?: string, selectedValue?: Categories, uploadImage?: string) {
   try {
     const session = await auth.api.getSession({
-    headers: await headers()
-    });
+      headers: await headers()
+    })
 
     if (!session) return;
 
