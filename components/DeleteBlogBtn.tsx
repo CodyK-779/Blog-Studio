@@ -4,7 +4,7 @@ import { Loader2Icon, Trash2Icon } from "lucide-react";
 import { Button } from "./ui/button";
 import { deletePost } from "@/actions/post-actions";
 import { toast } from "sonner";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   AlertDialog,
@@ -30,7 +30,13 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
   const { edgestore } = useEdgeStore();
   const router = useRouter();
 
-  const handleDelete = async (postId: string) => {
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    postId: string
+  ) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     setIsDeleting(true);
 
     try {
@@ -59,7 +65,7 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
       <AlertDialogTrigger asChild>
         <Button
           variant="destructive"
-          className="bg-red-500 relative z-10"
+          className="bg-red-500"
           size="sm"
           disabled={isDeleting}
         >
@@ -83,7 +89,7 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => handleDelete(postId)}
+            onClick={(e) => handleDelete(e, postId)}
             className="bg-red-500 hover:bg-red-700 text-white"
           >
             Confirm
