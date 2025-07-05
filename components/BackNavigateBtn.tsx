@@ -17,7 +17,7 @@ const BackNavigateBtn = () => {
       className="flex items-center gap-2 font-semibold w-fit mb-6"
     >
       <ArrowLeftIcon />
-      Home
+      Back
     </Button>
   );
 };

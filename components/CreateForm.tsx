@@ -193,7 +193,7 @@ const CreateForm = () => {
         </div>
         <Button
           onClick={handleSubmit}
-          className="flex items-center gap-2 font-medium w-full"
+          className="flex items-center gap-2 font-medium w-full sm:w-fit mx-4 sm:mx-auto"
           disabled={isPosting}
         >
           {isPosting ? (
