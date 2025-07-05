@@ -34,6 +34,8 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
     e: React.MouseEvent<HTMLButtonElement>,
     postId: string
   ) => {
+    e.stopPropagation();
+
     setIsDeleting(true);
 
     try {
