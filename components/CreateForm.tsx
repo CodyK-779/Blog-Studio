@@ -67,9 +67,9 @@ const CreateForm = () => {
         setTitle("");
         setSubTitle("");
         setUploadImage("");
+        setIsPosting(false);
 
         toast.success("Post created successfully!");
-        router.push("/blog/library");
       }
     } catch (error) {
       console.error("Failed to create Post", error);

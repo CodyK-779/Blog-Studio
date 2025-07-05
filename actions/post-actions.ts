@@ -18,7 +18,7 @@ export async function createPost(content: string, title: string, subTitle?: stri
 
     if (!userId) return;
 
-    await prisma.post.create({
+    const post = await prisma.post.create({
       data: {
         title,
         content,
@@ -29,7 +29,8 @@ export async function createPost(content: string, title: string, subTitle?: stri
       }
     })
 
-    return { success: true }
+    revalidatePath("/blog/library");
+    return { success: true, post }
   } catch (error) {
     console.error(error)
   }
