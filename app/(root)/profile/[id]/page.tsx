@@ -18,6 +18,7 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import { creator } from "../../blog/page";
 import { notFound } from "next/navigation";
+import BackNavigateBtn from "@/components/BackNavigateBtn";
 
 export default async function ProfilePage({
   params,
@@ -47,12 +48,13 @@ export default async function ProfilePage({
         User Profile
       </h1>
       <div className="max-w-3xl mx-auto w-full px-4 flex flex-col justify-center py-12">
-        <Button className="w-fit mb-6" asChild>
+        {/* <Button className="w-fit mb-6" asChild>
           <Link href="/blog" className="flex items-center gap-2 font-semibold">
             <ArrowLeftIcon />
             Home
           </Link>
-        </Button>
+        </Button> */}
+        <BackNavigateBtn />
         <Card className="border-neutral-300 border-2 dark:border-neutral-500">
           {user.email === "khantzawthein81@gmail.com" && (
             <CardHeader className="flex items-center justify-center">
