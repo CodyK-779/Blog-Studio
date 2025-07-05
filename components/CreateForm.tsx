@@ -28,6 +28,7 @@ import { useEdgeStore } from "@/lib/edgestore";
 import { SingleImageDropzone } from "./upload/single-image";
 import { UploaderProvider, type UploadFn } from "./upload/uploader-provider";
 import * as React from "react";
+import { useSession } from "@/lib/auth-client";
 
 const CreateForm = () => {
   const [isPosting, setIsPosting] = useState(false);
@@ -35,11 +36,15 @@ const CreateForm = () => {
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [selectedValue, setSelectedValue] = useState<Categories>();
+  const { data: session } = useSession();
 
   const [uploadImage, setUploadImage] = useState("");
 
+  if (!session) return;
+
+  const userId = session.user.id;
+
   const { edgestore } = useEdgeStore();
-  const router = useRouter();
 
   const handleSubmit = async () => {
     if (!content.trim() || !uploadImage || !title.trim()) {
@@ -55,6 +60,7 @@ const CreateForm = () => {
       });
 
       const results = await createPost(
+        userId,
         content,
         title,
         subTitle,

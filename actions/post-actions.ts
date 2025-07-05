@@ -6,18 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
-export async function createPost(content: string, title: string, subTitle?: string, selectedValue?: Categories, uploadImage?: string) {
+export async function createPost(userId: string, content: string, title: string, subTitle?: string, selectedValue?: Categories, uploadImage?: string) {
   try {
-    const session = await auth.api.getSession({
-      headers: await headers()
-    })
-
-    if (!session) return;
-
-    const userId = session.user.id;
-
-    if (!userId) return;
-
     const post = await prisma.post.create({
       data: {
         title,
