@@ -76,7 +76,7 @@ const FilterSection = ({ mt }: Props) => {
               onValueChange={(value: FilterType) =>
                 handleChange("filter", value)
               }
-              defaultValue={searchParams.get("filter") || "desc"}
+              defaultValue={searchParams.get("filter") || "asc"}
             >
               <SelectTrigger className="w-[140px] sm:w-[150px] border-gray-300 dark:border-gray-700 border-2">
                 <SelectValue placeholder="Filter" />
