@@ -16,7 +16,7 @@ export default function NotFoundPage() {
           </h1>
           <p className="text-center text-lg font-medium mt-4 mb-8">
             The page you're looking for doesn't exist go back and carefully
-            search your Fucking page again
+            search your page again
           </p>
           <HoverBorderGradient className="px-4 py-3 text-white">
             <Link href="/blog" className="flex items-center gap-2">
