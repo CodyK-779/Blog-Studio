@@ -18,7 +18,7 @@ const SignUpOauthButton = ({ provider, signUp }: Props) => {
   const handleClick = async () => {
     await signIn.social({
       provider,
-      callbackURL: "/",
+      callbackURL: "/blog",
       fetchOptions: {
         onRequest: () => setIsPending(true),
         onResponse: () => setIsPending(false),

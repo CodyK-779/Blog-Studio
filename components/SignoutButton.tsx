@@ -4,7 +4,6 @@ import { signOut } from "@/lib/auth-client";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
 import {
   AlertDialog,
@@ -20,7 +19,6 @@ import {
 
 const SignoutButton = () => {
   const [isPending, setIsPending] = useState(false);
-  const router = useRouter();
 
   const handleClick = async () => {
     setIsPending(true);
