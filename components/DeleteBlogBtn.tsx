@@ -48,7 +48,7 @@ const DeleteBlogBtn = ({ postId, imageUrl, redirectPath }: Props) => {
 
       if (results.success) {
         toast.success("Blog post deleted successfully!");
-        router.push(redirectPath);
+        router.push(redirectPath, { scroll: false });
       } else {
         toast.error("Failed to delete Blog post.");
       }

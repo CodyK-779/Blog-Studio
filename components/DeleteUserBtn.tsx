@@ -46,7 +46,7 @@ const DeleteUserBtn = ({ userId, text, redirectPath }: Props) => {
             },
           });
         } else {
-          router.push("/users");
+          router.push("/users", { scroll: false });
         }
       } else {
         toast.error("Failed to delete User.");

@@ -44,7 +44,7 @@ const ReplyCommentField = ({
         setComment("");
         toast.success("Added reply successfully!");
         setActiveReplyId(null);
-        router.push(`/blog/${postId}`);
+        router.push(`/blog/${postId}`, { scroll: false });
       }
     } catch (error) {
       toast.error("Failed to add reply");
