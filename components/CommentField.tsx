@@ -34,7 +34,7 @@ const CommentField = ({ postId }: Props) => {
       if (results?.success) {
         setComment("");
         toast.success("Comment added successfully!");
-        router.push(`/blog/${postId}`);
+        router.push(`/blog/${postId}`, { scroll: false });
       }
     } catch (error) {
       console.error("Failed to create comment");

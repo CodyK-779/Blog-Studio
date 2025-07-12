@@ -72,7 +72,7 @@ const LikeCmtDelete = ({ user, comment, postId, authorId, small }: Props) => {
 
       if (results?.success) {
         toast.success("Comment deleted successfully!");
-        router.push(`/blog/${postId}`);
+        router.push(`/blog/${postId}`, { scroll: false });
       }
     } catch (error) {
       console.error("Failed to delete comment");
