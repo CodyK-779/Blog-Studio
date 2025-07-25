@@ -6,7 +6,7 @@ const Overlay = ({ setOpenMenu }: Props) => {
   return (
     <div
       onClick={() => setOpenMenu(false)}
-      className="fixed cm:hidden min-h-screen inset-0 bg-black/50 z-20"
+      className="fixed lg:hidden min-h-screen inset-0 bg-black/50 z-20"
     />
   );
 };
