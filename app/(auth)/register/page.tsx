@@ -56,11 +56,11 @@ export default function RegisterPage() {
       <Card className="dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-bold">
-            NextBlog
+            Blog Studio
           </CardTitle>
           <CardDescription>
             <p className="text-center text-sm pt-1 font-semibold">
-              Register to join the NextBlog
+              Register to join the Blog-Studio
             </p>
           </CardDescription>
         </CardHeader>

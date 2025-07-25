@@ -55,11 +55,11 @@ export default function LoginPage() {
       <Card className="dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-bold">
-            NextBlog
+            Blog Studio
           </CardTitle>
           <CardDescription>
             <p className="text-center text-sm pt-1 font-semibold">
-              Login to join the NextBlog
+              Login to join the Blog-Studio
             </p>
           </CardDescription>
         </CardHeader>
