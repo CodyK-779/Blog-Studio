@@ -174,8 +174,8 @@ export const TypewriterEffectSmooth = ({
         transition={{
           duration: 0.8,
 
-          repeat: Infinity,
-          repeatType: "reverse",
+          // repeat: Infinity,
+          // repeatType: "reverse",
         }}
         className={cn(
           "block rounded-sm w-[4px] h-8 sm:h-12 bg-blue-500",
