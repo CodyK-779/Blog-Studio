@@ -94,11 +94,11 @@ const Footer = () => {
 
       {/* Copyright section */}
       <div className="container px-2 text-neutral-600 dark:text-neutral-300 flex flex-col cm:flex-row gap-1.5 items-center justify-center mt-10">
-        <p>
+        <p className="min-[350px]:text-base text-sm">
           © 2025 Blog Studio All rights reserved.{" "}
           <span className="mx-4 hidden cm:inline-block">|</span>
         </p>
-        <div className="flex items-center gap-4 text-sm cm:text-base">
+        <div className="flex items-center gap-4 text-xs min-[375px]:text-sm cm:text-base">
           <p className="hover:underline cursor-pointer">Privacy Policy</p>
           <p className="hover:underline cursor-pointer">Terms of Service</p>
           <p className="hover:underline cursor-pointer">Contact Us</p>

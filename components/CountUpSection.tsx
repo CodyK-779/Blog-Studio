@@ -8,7 +8,7 @@ const CountUpSection = async () => {
 
   return (
     <div className="container py-16">
-      <GradientText className="max-[370px]:text-3xl text-4xl md:text-5xl font-bold px-2 text-center mb-12">
+      <GradientText className="max-[350px]:text-2xl max-[370px]:text-3xl text-4xl md:text-5xl font-bold px-2 text-center mb-12">
         Community Stats
       </GradientText>
 

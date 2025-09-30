@@ -48,7 +48,7 @@ export const badgeType = (category: string, padding?: boolean) => {
       <Badge
         variant="default"
         className={`bg-red-500 text-white ${
-          padding && "font-semibold sm:text-sm sm:px-4 sm:py-1"
+          padding && "font-semibold sm:text-sm text-xs sm:px-4 sm:py-1"
         }`}
       >
         Games
@@ -113,7 +113,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
   return (
     <div className="container mb-10" id="blog-section">
       <div className="border-2 border-neutral-300 dark:border-neutral-600 py-8 pb-10 px-1.5 sm:px-4 rounded-xl">
-        <GradientText className="font-semibold text-4xl text-center mb-12">
+        <GradientText className="font-semibold min-[500px]:text-4xl text-3xl text-center mb-12">
           Blog Section
         </GradientText>
         {posts.length > 0 ? (
@@ -124,7 +124,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                 className="border-neutral-300 border-2 dark:border-neutral-600 shadow-lg rounded-lg dark:bg-neutral-900 hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-transform duration-150 ease-in"
               >
                 <div className="flex items-center justify-between px-4 py-3">
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center min-[350px]:gap-4 gap-2.5">
                     <Link href={`/profile/${post.author.id}`}>
                       <Avatar className="cursor-pointer size-8">
                         <AvatarImage src={post.author.image!} />
@@ -133,7 +133,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                         </AvatarFallback>
                       </Avatar>
                     </Link>
-                    <div className="flex flex-col text-sm">
+                    <div className="flex flex-col min-[350px]:text-sm text-xs">
                       <div className="flex items-center gap-2">
                         <p>{post.author.name}</p>
                         {post.author.role === "Admin" && (
@@ -167,7 +167,7 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                 <div className="p-4">
                   <div className="flex items-center justify-between">
                     <Link href={`/blog/${post.id}`}>
-                      <p className="text-2xl font-bold mb-1 text-yellow-400 truncate max-w-[15ch] hover:underline">
+                      <p className="min-[400px]:text-2xl min-[350px]:text-xl text-lg font-bold mb-1 text-yellow-400 truncate max-w-[15ch] hover:underline">
                         {post.title}
                       </p>
                     </Link>
@@ -181,12 +181,12 @@ const BlogSection = async ({ selectedCategory, selectedFilter }: Props) => {
                     )}
                   </div>
                   {post.subTitle && (
-                    <p className="font-semibold mb-1 text-neutral-700 dark:text-white truncate max-w-[40ch]">
+                    <p className="min-[400px]:text-base text-sm font-semibold mb-1 text-neutral-700 dark:text-white line-clamp-1">
                       {post.subTitle}
                     </p>
                   )}
                   {/* text-blue-600 dark:text-red-600 */}
-                  <p className="text-sm font-medium truncate max-w-[50ch] text-neutral-500 dark:text-neutral-400">
+                  <p className="min-[400px]:text-sm text-xs font-medium line-clamp-1 text-neutral-500 dark:text-neutral-400">
                     {post.content}
                   </p>
                 </div>

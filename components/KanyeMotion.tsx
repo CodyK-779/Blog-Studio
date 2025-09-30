@@ -13,7 +13,7 @@ const KanyeMotion = () => {
           viewport={{ once: true }}
           className="flex-1 text-center md:text-left"
         >
-          <h2 className="text-3xl md:text-4xl font-bold leading-snug text-neutral-800 dark:text-white">
+          <h2 className=" md:text-4xl min-[450px]:text-3xl min-[375px]:text-2xl text-xl font-bold leading-snug text-neutral-800 dark:text-white">
             This website is so amazing,
             <br />
             even{" "}
@@ -22,7 +22,7 @@ const KanyeMotion = () => {
             </span>{" "}
             has something to say about it!
           </h2>
-          <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-300">
+          <p className="mt-4 min-[420px]:text-lg min-[375px]:text-base text-sm text-neutral-600 dark:text-neutral-300">
             Here's a short clip from the man himself. 🔥
           </p>
         </motion.div>

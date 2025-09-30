@@ -57,10 +57,10 @@ const Testimonials = () => {
   return (
     <div className="w-full mt-10">
       <div className="flex flex-col items-center justify-center mb-20">
-        <GradientText className="text-4xl sm:text-6xl font-bold">
+        <GradientText className="sm:text-6xl min-[460px]:text-4xl text-3xl font-bold">
           Testimonials
         </GradientText>
-        <p className="text-2xl sm:text-3xl font-medium text-center px-2">
+        <p className="sm:text-3xl min-[460px]:text-2xl min-[400px]:text-xl text-lg font-medium text-center px-2">
           Here's what our users say about this website
         </p>
       </div>

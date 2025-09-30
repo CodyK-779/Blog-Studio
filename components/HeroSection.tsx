@@ -23,7 +23,7 @@ const HeroSection = () => {
   const words =
     "A place where creators share their works and let people know their talent and hard work";
   const wordsStyle =
-    "text-lg min-[500px]:text-2xl cm:text-3xl font-semibold text-center mb-6 cm:w-[800px] z-10 px-2";
+    "text-base min-[400px]:text-lg min-[500px]:text-2xl cm:text-3xl font-semibold text-center mb-6 cm:w-[800px] z-10 px-2";
 
   return (
     <BackgroundLines className="flex flex-col items-center justify-center">
