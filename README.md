@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+⭐ Blog Studio — Full-Stack Modern Blogging Platform
 
-## Getting Started
+A fast, secure, and feature-rich full-stack blogging platform built with the modern Next.js ecosystem.
 
-First, run the development server:
+🚀 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Blog Studio is a fully featured blogging platform designed for seamless content creation, secure authentication, rich media uploads, and real-time engagement. It includes a full admin dashboard for managing posts, users, categories, and platform content — all built with a clean, scalable architecture.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project demonstrates production-ready full-stack development using Next.js App Router, modern UI patterns, server actions, type-safety, and high-performance database queries.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🧩 Features
+📝 Rich Blog Editing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create, update, and delete posts
 
-## Learn More
+Markdown + rich-text hybrid editor
 
-To learn more about Next.js, take a look at the following resources:
+Category system + tags
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Image uploads with previews (EdgeStore)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🔐 Secure Authentication
 
-## Deploy on Vercel
+Role-based access (admin / user)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Session management via Better-Auth
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Protected routes + server-side validation
+
+⚡ Performance & UX
+
+Optimized caching with Next.js
+
+Instant navigation & transitions (Framer Motion)
+
+Dynamic loading states & skeletons
+
+Smooth animations with Aceternity UI & React Bits
+
+📊 Admin Dashboard
+
+Manage posts
+
+Manage users
+
+Review platform activity
+
+Clean and responsive UI (Tailwind + shadcn/ui components)
+
+📸 Media Handling
+
+Image uploads via EdgeStore
+
+Automatic optimization & secure delivery
+
+🗄️ Scalable Backend
+
+Prisma ORM + NeonDB (serverless Postgres)
+
+Fully typed models & database queries
+
+Safe server actions
+
+🛠️ Tech Stack
+
+Frontend:
+Next.js (App Router), React 19, TypeScript, TailwindCSS, shadcn/ui, Aceternity UI, React Bits, Framer Motion
+
+Backend:
+Prisma ORM, Neon Serverless PostgreSQL, Better-Auth, EdgeStore, Next.js Server Actions
+
+Dev Tools:
+ESLint, Prettier, GitHub Actions, Vercel, pnpm
